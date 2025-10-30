@@ -34,3 +34,26 @@ body {
     "Segoe UI", sans-serif;
   min-height: 100vh;
 }
+
+@keyframes mouseScroll {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(4px);
+  }
+  80% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+.animate-mouseScroll {
+  animation: mouseScroll 1.8s ease-in-out infinite;
+}

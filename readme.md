@@ -1,40 +1,54 @@
-# Siddarth Bandi – Portfolio Planning
+# Siddarth Bandi – Portfolio
+
+Immersive, animation-led portfolio showcasing scalable full-stack systems and AI-driven experiences.
+
+## Quick Start
+
+- `npm install` – install dependencies.  
+- `npm run dev` – launch Next.js dev server on http://localhost:3000.  
+- `npm run build && npm start` – production bundle & preview.  
+- `npm run lint` – static analysis with ESLint and Next rules.
+
+## Core Frontend Stack
+
+- **Framework**: Next.js 16 (App Router) with React Server Components for hybrid rendering.
+- **Language**: TypeScript for explicit component contracts while orchestrating animation libraries.
+- **Styling**: Tailwind CSS v4 + CSS variables for theming, paired with Space Grotesk headings and Geist body.
+- **Motion Layer**: Framer Motion (micro-interactions), GSAP + ScrollTrigger (story beats), Lenis (smooth scroll).
+- **3D Layer**: `@splinetool/react-spline` for exported hero scenes, `@react-three/fiber` + `drei` reserved for bespoke visual modules.
+- **State & Tooling**: Lightweight client state via Zustand/Jotai when animation sync is required; ESLint + TypeScript for quality gates.
 
 ## 3D & Visual Libraries
 
 | Feature | Tool | Why use it |
 | --- | --- | --- |
-| 3D scenes | Spline 3D | Easiest path to interactive 3D without hand-coding; exports React/Webflow embeds directly. |
-| Low-level 3D | Three.js | Full control over particles, lighting, and physics for bespoke visuals. |
-| Model rendering in React | @react-three/fiber + drei | React-first abstraction over Three.js with declarative, component-based authoring. |
-| Animated backgrounds | Vanta.js | Lightweight, mobile-friendly preset 3D effects like waves, rings, and birds. |
-| Particle systems | tsparticles / Particle.js | Purpose-built for hero particle animations and animated logos. |
+| 3D scenes | Spline 3D | Export interactive canvases straight into React/Next embeds. |
+| Low-level 3D | Three.js | Fine-grained control over particles, lighting, and physics. |
+| Model rendering in React | @react-three/fiber + drei | Declarative 3D scene graph that plays nicely with React. |
+| Animated backgrounds | Vanta.js | Lightweight preset 3D backgrounds for supporting sections. |
+| Particle systems | tsparticles / Particles.js | Purpose-built hero particles or logo reveals. |
 
 ## Scroll & Motion Libraries
 
 | Type | Library | Use case |
 | --- | --- | --- |
-| Timeline-based animation | GSAP (GreenSock) | Powerhouse for complex timelines, reveals, parallax, and morphing. |
-| Scroll interactions | Locomotive Scroll / Lenis | Adds inertia, smooth scrolling, and scroll-linked effects. |
-| Motion in React | Framer Motion | Component-level transitions such as fades, slides, and hovers. |
-| 3D scroll storytelling | ScrollTrigger (GSAP plugin) | Drives scroll-based hero transitions and multi-section narratives. |
+| Timeline-based animation | GSAP (GreenSock) | Scroll orchestration, parallax, morphing sequences. |
+| Scroll interactions | Lenis / Locomotive Scroll | Smooth inertia and scroll-linked variables. |
+| Motion in React | Framer Motion | Component-level transitions, hovers, and staggers. |
+| 3D scroll storytelling | GSAP ScrollTrigger | Scroll-driven stage transitions coordinating with 3D. |
 
 ## Styling & Design
 
 | Tool | Why it is used |
 | --- | --- |
-| Tailwind CSS | Utility-first approach for fast, responsive iteration. |
-| ShadCN UI / Radix UI | Accessible, pre-styled primitives for nav, modals, and tooltips. |
-| CSS variables + Lenis | Enables modern dark/light theming and scroll-driven color shifts. |
+| Tailwind CSS | Utility-first iteration across breakpoints and themes. |
+| ShadCN UI / Radix UI | Accessible, polished primitives for overlays and navigation. |
+| CSS Variables + Lenis | Theme tokens that respond to scroll velocity and section focus. |
 
-## Recommended Frontend Setup
+## Hero Integration (Current State)
 
-- **Framework**: Next.js 14 with the App Router for hybrid rendering, route-based layouts, and built-in image optimization.
-- **Language**: TypeScript to keep the component API surface explicit while juggling advanced animation libraries.
-- **Styling**: Tailwind CSS with CSS variables to implement theming, augmented by ShadCN UI components where you need polished primitives.
-- **Animation Stack**: Framer Motion for component transitions, GSAP + ScrollTrigger for timeline control, and Lenis to smooth scrolling interactions.
-- **3D Layer**: @react-three/fiber and drei to integrate custom Three.js scenes, with Spline embeds for quick wins where interactive canvases are pre-built.
-- **State & Data**: Lightweight global store (Zustand or Jotai) only where animation state must sync across sections; otherwise rely on React server components and props.
-- **Tooling**: ESLint, Prettier, and Vite-style fast refresh via Next.js dev server for rapid iteration.
+- Spline hero scene embedded via `@splinetool/react-spline/next`.
+- Gradient overlays, uppercase typographic system, and conic-accent marker inspired by the provided mood board.
+- Dark, cinematic palette with drop shadows that echo the Spline lighting.
 
-This stack balances creative freedom with developer velocity, keeps the door open for both code-first Three.js work and Spline-driven embeds, and offers a maintainable foundation for a modern, storytelling-heavy portfolio.
+Upcoming steps will expand the landing flow into narrative sections (about, case studies, tech stack) with coordinated scroll and motion cues.

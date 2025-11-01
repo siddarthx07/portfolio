@@ -50,5 +50,15 @@ Immersive, animation-led portfolio showcasing scalable full-stack systems and AI
 - Spline hero scene embedded via `@splinetool/react-spline/next`.
 - Gradient overlays, uppercase typographic system, and conic-accent marker inspired by the provided mood board.
 - Dark, cinematic palette with drop shadows that echo the Spline lighting.
+- **Mobile-responsive design** with optimized performance and user experience across devices.
+
+### Mobile View Implementation
+
+- **Responsive Navigation**: Desktop navigation bar transforms into a hamburger menu on mobile devices with smooth animations and backdrop blur effects.
+- **Performance Optimization**: Spline 3D scene is hidden on mobile (`hidden md:block`) to improve loading times and performance on smaller devices.
+- **Mobile-Specific Content**: Dedicated mobile hero section with optimized typography and spacing for smaller screens.
+- **Adaptive Backgrounds**: Gradient background for mobile devices while maintaining the 3D scene on desktop.
+- **Responsive Typography**: Scaled text sizes and tracking optimized for mobile readability (`text-4xl` on mobile vs larger on desktop).
+- **Touch-Friendly Interface**: Mobile menu items with appropriate tap targets and hover states adapted for touch interactions.
 
 Upcoming steps will expand the landing flow into narrative sections (about, case studies, tech stack) with coordinated scroll and motion cues.

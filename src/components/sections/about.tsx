@@ -10,7 +10,14 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 py-20 text-cloud sm:py-48 lg:py-64"
+      className="relative py-20 text-cloud sm:py-48 lg:py-64"
+      style={{
+        background: `
+          radial-gradient(ellipse at 20% 30%, #f9731633 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 70%, #f9731633 0%, transparent 50%),
+          linear-gradient(135deg, #05080f 0%, #0f172a 50%, #9ca3af22 100%)
+        `,
+      }}
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Header */}

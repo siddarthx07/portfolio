@@ -1,27 +1,12 @@
 "use client";
 
+import Image from "next/image";
+
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
-import { Card3D } from "@/components/ui/card-3d";
 import { CardHoverEffect } from "@/components/ui/card-hover-effect";
 import { EvervaultCard } from "@/components/ui/evervault-card";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { TextRevealCard } from "@/components/ui/text-reveal-card";
-
-const UserIcon = () => (
-  <svg
-    className="h-8 w-8 text-cloud/70"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-    />
-  </svg>
-);
 
 const LightBulbIcon = () => (
   <svg
@@ -76,23 +61,28 @@ export default function About() {
           {/* Card 1: Who Am I - Small, Top Left */}
           <BentoGridItem
             title={
-              <div className="mb-2 text-2xl font-bold tracking-tight md:text-3xl">
+              <div className="mb-2 text-center text-2xl font-bold tracking-tight md:text-3xl">
                 Who Am I
               </div>
             }
             description={
-              <p className="text-base leading-relaxed">
+              <p className="text-center text-base leading-relaxed">
                 I&apos;m a Software Engineer and graduate student at Virginia
                 Tech, passionate about designing scalable, reliable systems that
                 connect data, intelligence, and user experience.
               </p>
             }
             header={
-              <Card3D>
-                <div className="flex h-20 items-center justify-center">
-                  <UserIcon />
-                </div>
-              </Card3D>
+              <div className="relative mx-auto h-48 w-48 overflow-hidden rounded-[2.75rem] border border-white/10 transition-transform duration-500 hover:scale-[1.05] sm:h-52 sm:w-52">
+                <Image
+                  src="/halftone_1762229259.png"
+                  alt="Portrait of Siddarth Bandi in halftone style"
+                  fill
+                  sizes="(min-width: 640px) 13rem, 12rem"
+                  className="object-cover object-center"
+                  priority
+                />
+              </div>
             }
             className="md:col-span-1"
           />

@@ -59,7 +59,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative bg-night py-20 text-cloud sm:py-32"
+      className="relative bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 py-20 text-cloud sm:py-32"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Header */}
@@ -76,15 +76,15 @@ export default function About() {
           {/* Card 1: Who Am I - Small, Top Left */}
           <BentoGridItem
             title={
-              <div className="mb-1 text-2xl font-bold tracking-tight">
+              <div className="mb-2 text-2xl font-bold tracking-tight md:text-3xl">
                 Who Am I
               </div>
             }
             description={
               <p className="text-base leading-relaxed">
                 I&apos;m a Software Engineer and graduate student at Virginia
-                Tech, focused on designing reliable, human-centered technology
-                that scales efficiently.
+                Tech, passionate about designing scalable, reliable systems that
+                connect data, intelligence, and user experience.
               </p>
             }
             header={
@@ -105,25 +105,12 @@ export default function About() {
               </div>
             }
             description={
-              <div>
-                <p className="mb-4 text-base leading-relaxed md:text-lg">
-                  I enjoy creating products that connect machine learning with
-                  real-world usability — from intelligent dashboards and
-                  fraud-detection systems to full-stack web apps powered by
-                  cloud infrastructure.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cloud/80">
-                    ML
-                  </span>
-                  <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cloud/80">
-                    Full-Stack
-                  </span>
-                  <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cloud/80">
-                    Cloud
-                  </span>
-                </div>
-              </div>
+              <p className="text-base leading-relaxed md:text-lg">
+                I build full-stack and AI-driven applications that combine backend
+                efficiency with intuitive design — from fraud-detection systems and
+                intelligent dashboards to cross-platform apps powered by cloud
+                infrastructure.
+              </p>
             }
             header={
               <TextRevealCard>
@@ -138,19 +125,17 @@ export default function About() {
           {/* Card 3: What I Value - Small, Bottom Left */}
           <BentoGridItem
             title={
-              <div className="mb-1 text-2xl font-bold tracking-tight">
+              <div className="mb-2 text-2xl font-bold tracking-tight md:text-3xl">
                 What I Value
               </div>
             }
             description={
               <p className="text-base leading-relaxed">
-                I care about building things that are{" "}
-                <span className="font-semibold text-cloud">clear</span>,{" "}
+                I focus on creating software that is{" "}
+                <span className="font-semibold text-cloud">robust</span>,{" "}
                 <span className="font-semibold text-cloud">fast</span>, and{" "}
-                <span className="font-semibold text-cloud">meaningful</span> —
-                not just technically strong but designed with{" "}
-                <span className="font-semibold text-cloud">purpose</span> and
-                impact in mind.
+                <span className="font-semibold text-cloud">purposeful</span> —
+                engineered for clarity, performance, and real-world impact.
               </p>
             }
             header={
@@ -175,22 +160,12 @@ export default function About() {
               </div>
             }
             description={
-              <div>
-                <p className="mb-4 text-base leading-relaxed md:text-lg">
-                  At Virginia Tech, I&apos;m exploring the intersection of AI,
-                  data, and user experience, working on projects that merge
-                  computer vision and deep learning for agriculture and
-                  environmental sustainability.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cloud/80">
-                    AI & CV
-                  </span>
-                  <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cloud/80">
-                    Agri-Tech
-                  </span>
-                </div>
-              </div>
+              <p className="text-base leading-relaxed md:text-lg">
+                At Virginia Tech, I&apos;m advancing work in applied AI and
+                software systems, developing cloud-based tools that integrate
+                computer vision and deep learning for agriculture and
+                sustainability.
+              </p>
             }
             header={
               <CardHoverEffect>

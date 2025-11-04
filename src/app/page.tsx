@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import About from "@/components/sections/about";
+import Experience from "@/components/sections/experience";
 
 type VantaEffectInstance = {
   destroy: () => void;
@@ -95,7 +96,7 @@ export default function Home() {
     <>
       <main
         id="hero"
-        className="relative flex min-h-screen flex-col overflow-hidden bg-night text-cloud"
+        className="relative flex min-h-screen flex-col bg-night text-cloud"
       >
         <div
           ref={vantaContainerRef}
@@ -197,6 +198,7 @@ export default function Home() {
 
       {/* About Section */}
       <About />
+      <Experience />
     </>
   );
 }

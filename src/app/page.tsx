@@ -171,9 +171,6 @@ export default function Home() {
         <p className="mt-4 text-2xl font-semibold text-cloud sm:text-3xl">
           I&apos;m a software engineer.
         </p>
-        <p className="mt-5 max-w-xl text-sm leading-relaxed text-cloud/70 sm:text-base">
-          Building scalable full-stack systems and AI-driven applications.
-        </p>
       </div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-12 flex justify-center sm:bottom-16">
@@ -186,7 +183,7 @@ export default function Home() {
       </div>
 
       <div
-        className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-night/40 via-transparent to-night/80"
+        className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-night/40 via-transparent to-transparent"
         aria-hidden
       />
 

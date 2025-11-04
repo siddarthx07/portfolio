@@ -121,11 +121,18 @@ export default function About() {
             }
             description={
               <p className="text-base leading-relaxed">
-                I focus on creating software that is{" "}
-                <span className="font-semibold text-cloud">robust</span>,{" "}
+                I care about building things that are{" "}
+                <span className="font-semibold text-cloud">clear</span>,{" "}
                 <span className="font-semibold text-cloud">fast</span>, and{" "}
-                <span className="font-semibold text-cloud">purposeful</span> —
-                engineered for clarity, performance, and real-world impact.
+                <span className="font-semibold text-cloud">meaningful</span> —
+                not just{" "}
+                <span className="font-semibold text-cloud">
+                  technically strong
+                </span>{" "}
+                but designed with{" "}
+                <span className="font-semibold text-cloud">purpose</span> and{" "}
+                <span className="font-semibold text-cloud">impact</span> in
+                mind.
               </p>
             }
             header={

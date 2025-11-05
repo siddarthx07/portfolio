@@ -18,10 +18,10 @@ const experience: ExperienceEntry[] = [
     yearLabel: "JAN 2025 – PRESENT",
     heading: "Research Assistant · Software Engineering",
     highlight:
-      "Orchestrating a weather-aware farm management platform that reduces manual planning errors by 20%.",
+      "Orchestrated a precision agriculture platform that reduces crop stress detection errors by 85% through AI-powered disease identification and thermal imaging.",
     bullets: [
-      "Built REST APIs processing 500+ cross-platform requests per day across Swift and Kotlin clients.",
-      "Maintained sub-200ms CoreML inference for 43+ crop disease classes while shipping secure backend services.",
+      "Real-time satellite monitoring of 10m-resolution NDVI data across unlimited field boundaries for precision irrigation management",
+      "43+ disease classes detected across 8 crop types with real-time GPS mapping and treatment recommendations",
     ],
     stack: ["Swift", "Kotlin", "CoreML", "REST", "AWS"],
   },

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import About from "@/components/sections/about";
 import Experience from "@/components/sections/experience";
+import Projects from "@/components/sections/projects";
 
 type VantaEffectInstance = {
   destroy: () => void;
@@ -199,6 +200,7 @@ export default function Home() {
       {/* About Section */}
       <About />
       <Experience />
+      <Projects />
     </>
   );
 }

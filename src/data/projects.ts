@@ -1,6 +1,9 @@
 import type { StaticImageData } from "next/image";
 
 import bookstoreProjectImage from "../../public/bookstore-project.png";
+import secureEnterpriseImage from "../../public/Secure-Enterpirse-chatbot-1.png";
+import mccsImage from "../../public/MCCS-2.png";
+import aiCoverLetterImage from "../../public/AI-Cover-Letter-Assistant.png";
 
 export type Project = {
   title: string;
@@ -35,7 +38,7 @@ export const projects: Project[] = [
     title: "Secure Enterprise Document Chatbot",
     description:
       "Role-aware knowledge assistant that ingests PDFs, embeds content, and serves GPT-3.5 powered answers with guardrails. Streamlit front-end, LangChain orchestration, and Firebase services deliver secure chat with full auditability.",
-    image: "",
+    image: secureEnterpriseImage,
     skills: [
       "Python",
       "LangChain",
@@ -53,7 +56,7 @@ export const projects: Project[] = [
     title: "Real-Time Fraud Mitigation System for MCCS",
     description:
       "Full-stack e-commerce fraud detection system combining a React analytics dashboard, Node.js services, and Python ML models running on AWS. Reduces false positives by 30% via Optuna-tuned ensembles and ships a role-based MERN admin console.",
-    image: "/halftone_1762228908.png",
+    image: mccsImage,
     skills: [
       "React 18",
       "Node.js",
@@ -71,7 +74,7 @@ export const projects: Project[] = [
     title: "AI Cover Letter Assistant",
     description:
       "Chrome extension that extracts job details from Glassdoor and Greenhouse, analyzes your resume, and generates Gemini-powered cover letters. Auto-fills application forms or exports HTML for manual upload to streamline submissions.",
-    image: "/halftone_1762229259.png",
+    image: aiCoverLetterImage,
     skills: [
       "JavaScript",
       "Chrome Extension MV3",

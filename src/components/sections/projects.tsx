@@ -4,13 +4,48 @@ import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { projects } from "@/data/projects";
 import Image from "next/image";
-import type { StaticImageData } from "next/image";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Projects() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const container = containerRef.current;
+
+    if (!section || !container) return;
+
+    // Calculate the total scroll distance needed
+    const scrollWidth = container.scrollWidth - window.innerWidth;
+
+    const scrollTween = gsap.to(container, {
+      x: -scrollWidth,
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        pin: true,
+        scrub: 1,
+        end: () => `+=${scrollWidth}`,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    return () => {
+      scrollTween.scrollTrigger?.kill();
+      scrollTween.kill();
+    };
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="projects"
-      className="relative py-24 text-cloud sm:py-32"
+      className="relative overflow-hidden py-24 text-cloud sm:py-32"
       style={{
         background: `
           radial-gradient(ellipse at 20% 30%, #f9731633 0%, transparent 50%),
@@ -28,11 +63,11 @@ export default function Projects() {
           <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-cloud/30 to-transparent" />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div ref={containerRef} className="flex gap-8">
           {projects.map((project, index) => (
-            <div key={index} className="flex items-center justify-center">
+            <div key={index} className="flex-shrink-0 flex items-center justify-center">
               <CardContainer className="inter-var">
-                <CardBody className="group/card relative h-auto w-auto sm:w-[30rem] rounded-3xl border border-white/10 bg-white/[0.04] p-8 shadow-[0_25px_70px_-30px_rgba(15,23,42,0.75)]">
+                <CardBody className="group/card relative h-auto w-[30rem] min-w-[30rem] rounded-3xl border border-white/10 bg-white/[0.04] p-8 shadow-[0_25px_70px_-30px_rgba(15,23,42,0.75)]">
                   <CardItem
                     translateZ="50"
                     className="text-2xl font-semibold text-cloud sm:text-3xl"

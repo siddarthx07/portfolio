@@ -74,11 +74,11 @@ export const projects: Project[] = [
     skills: [
       "JavaScript",
       "REST APIs",
-      "Chrome Extension MV3",
-      "Google Gemini API",
-      "DOM Manipulation",
+      "Gemini API",
       "Async/Await",
+      "DOM Manipulation",
       "Web Scraping",
+      "Chrome Extension MV3",
     ],
     links: {
       github: "https://github.com/siddarthx07/ai-job-application-helper",

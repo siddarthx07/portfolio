@@ -14,7 +14,6 @@ export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -81,82 +80,89 @@ export default function Projects() {
           ref={containerRef}
           className="flex gap-8 sm:gap-10 lg:gap-12 xl:gap-14 px-[6vw] sm:px-[8vw] lg:px-[9vw]"
         >
-          {projects.map((project, index) => (
-            <div key={index} className="flex-shrink-0 flex items-center justify-center">
-              <CardContainer
-                className="inter-var"
-                containerClassName="items-start sm:items-center py-4 sm:py-6 lg:py-10"
-              >
-                <CardBody className="group/card relative h-auto w-[28rem] min-w-[28rem] sm:w-[30rem] sm:min-w-[30rem] lg:w-[34rem] lg:min-w-[34rem] xl:w-[38rem] xl:min-w-[38rem] 2xl:w-[40rem] 2xl:min-w-[40rem] rounded-3xl border border-white/10 bg-white/[0.04] p-7 sm:p-9 shadow-[0_25px_70px_-30px_rgba(15,23,42,0.75)]">
-                  <CardItem
-                    translateZ="50"
-                    className="text-3xl font-semibold text-cloud lg:text-4xl"
-                  >
-                    {project.title}
-                  </CardItem>
-                  <CardItem
-                    as="p"
-                    translateZ="60"
-                    className="text-cloud/70 text-base max-w-2xl mt-4 leading-relaxed"
-                  >
-                    {project.description}
-                  </CardItem>
-                  <CardItem translateZ="100" className="w-full mt-6">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      width={1000}
-                      height={600}
-                      className="h-80 w-full object-contain rounded-xl group-hover/card:shadow-xl"
-                      quality={100}
-                    />
-                  </CardItem>
-                  <div className="flex flex-wrap gap-2.5 mt-10">
-                    {project.skills.map((skill, skillIndex) => (
-                      <span
-                        key={skillIndex}
-                        className="rounded-full border border-white/10 bg-white/[0.06] px-4 py-1.5 text-sm uppercase tracking-[0.25em] text-cloud/60"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex justify-between items-center mt-10">
-                    {project.links?.github && (
-                      <CardItem
-                        translateZ={20}
-                        as="a"
-                        href={project.links.github}
-                        target="_blank"
-                        className="px-6 py-3 rounded-xl text-sm font-normal text-cloud hover:text-white transition"
-                      >
-                        GitHub →
-                      </CardItem>
-                    )}
-                    {project.links?.live ? (
-                      <CardItem
-                        translateZ={20}
-                        as="a"
-                        href={project.links.live}
-                        target="_blank"
-                        className="px-6 py-3 rounded-xl bg-white/10 text-cloud text-sm font-bold hover:bg-white/20 transition"
-                      >
-                        Live Demo
-                      </CardItem>
-                    ) : (
-                      <CardItem
-                        translateZ={20}
-                        as="button"
-                        className="px-6 py-3 rounded-xl bg-white/10 text-cloud text-sm font-bold hover:bg-white/20 transition cursor-not-allowed"
-                      >
-                        Live Demo
-                      </CardItem>
-                    )}
-                  </div>
-                </CardBody>
-              </CardContainer>
-            </div>
-          ))}
+          {projects.map((project, index) => {
+            const imageClass =
+              index === 1 || index === 2
+                ? "w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                : "h-80 w-full object-contain rounded-xl group-hover/card:shadow-xl";
+
+            return (
+              <div key={index} className="flex-shrink-0 flex items-center justify-center">
+                <CardContainer
+                  className="inter-var"
+                  containerClassName="items-start sm:items-center py-4 sm:py-6 lg:py-10"
+                >
+                  <CardBody className="group/card relative h-auto w-[28rem] min-w-[28rem] sm:w-[30rem] sm:min-w-[30rem] lg:w-[34rem] lg:min-w-[34rem] xl:w-[38rem] xl:min-w-[38rem] 2xl:w-[40rem] 2xl:min-w-[40rem] rounded-3xl border border-white/10 bg-white/[0.04] p-7 sm:p-9 shadow-[0_25px_70px_-30px_rgba(15,23,42,0.75)]">
+                    <CardItem
+                      translateZ="50"
+                      className="text-3xl font-semibold text-cloud lg:text-4xl"
+                    >
+                      {project.title}
+                    </CardItem>
+                    <CardItem
+                      as="p"
+                      translateZ="60"
+                      className="text-cloud/70 text-base max-w-2xl mt-4 leading-relaxed"
+                    >
+                      {project.description}
+                    </CardItem>
+                    <CardItem translateZ="100" className="w-full mt-6">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        width={1000}
+                        height={600}
+                        className={imageClass}
+                        quality={100}
+                      />
+                    </CardItem>
+                    <div className="flex flex-wrap gap-2.5 mt-10">
+                      {project.skills.map((skill, skillIndex) => (
+                        <span
+                          key={skillIndex}
+                          className="rounded-full border border-white/10 bg-white/[0.06] px-4 py-1.5 text-sm uppercase tracking-[0.25em] text-cloud/60"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex justify-between items-center mt-10">
+                      {project.links?.github && (
+                        <CardItem
+                          translateZ={20}
+                          as="a"
+                          href={project.links.github}
+                          target="_blank"
+                          className="px-6 py-3 rounded-xl text-sm font-normal text-cloud hover:text-white transition"
+                        >
+                          GitHub →
+                        </CardItem>
+                      )}
+                      {project.links?.live ? (
+                        <CardItem
+                          translateZ={20}
+                          as="a"
+                          href={project.links.live}
+                          target="_blank"
+                          className="px-6 py-3 rounded-xl bg-white/10 text-cloud text-sm font-bold hover:bg-white/20 transition"
+                        >
+                          Live Demo
+                        </CardItem>
+                      ) : (
+                        <CardItem
+                          translateZ={20}
+                          as="button"
+                          className="px-6 py-3 rounded-xl bg-white/10 text-cloud text-sm font-bold hover:bg-white/20 transition cursor-not-allowed"
+                        >
+                          Live Demo
+                        </CardItem>
+                      )}
+                    </div>
+                  </CardBody>
+                </CardContainer>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

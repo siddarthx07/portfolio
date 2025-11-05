@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
-
-import { projects } from "@/data/projects";
+import bookstoreProjectImage from "../../../public/bookstore-project.png";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
@@ -21,73 +19,71 @@ export default function Projects() {
           <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-cloud/30 to-transparent" />
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-2">
-          {projects.map((project) => (
-            <CardContainer
-              key={project.title}
-              className="w-full"
-              containerClassName="!py-0"
-            >
-              <CardBody className="group/card relative h-auto w-auto rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-left shadow-[0_25px_70px_-30px_rgba(15,23,42,0.75)] backdrop-blur">
+        <div className="flex items-center justify-center">
+          <CardContainer className="inter-var">
+            <CardBody className="group/card relative h-auto w-auto sm:w-[30rem] rounded-3xl border border-white/10 bg-white/[0.04] p-8 shadow-[0_25px_70px_-30px_rgba(15,23,42,0.75)]">
+              <CardItem
+                translateZ="50"
+                className="text-2xl font-semibold text-cloud sm:text-3xl"
+              >
+                Bookstore React Full Stack
+              </CardItem>
+              <CardItem
+                as="p"
+                translateZ="60"
+                className="text-cloud/70 text-sm max-w-sm mt-2 leading-relaxed"
+              >
+                End-to-end bookstore platform pairing a React + TypeScript client with a Java JAX-RS API. Supports category browsing, detailed product pages, secure checkout, and transactional order management backed by relational storage.
+              </CardItem>
+              <CardItem translateZ="100" className="w-full mt-4">
+                <img
+                  src={bookstoreProjectImage.src}
+                  height="1000"
+                  width="1000"
+                  className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                  alt="Bookstore project"
+                />
+              </CardItem>
+              <div className="flex flex-wrap gap-2 mt-8">
+                <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs uppercase tracking-[0.25em] text-cloud/60">
+                  React 18
+                </span>
+                <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs uppercase tracking-[0.25em] text-cloud/60">
+                  TypeScript
+                </span>
+                <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs uppercase tracking-[0.25em] text-cloud/60">
+                  Context API
+                </span>
+                <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs uppercase tracking-[0.25em] text-cloud/60">
+                  Java (JAX-RS)
+                </span>
+                <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs uppercase tracking-[0.25em] text-cloud/60">
+                  JDBC
+                </span>
+                <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs uppercase tracking-[0.25em] text-cloud/60">
+                  Gradle
+                </span>
+              </div>
+              <div className="flex justify-between items-center mt-8">
                 <CardItem
-                  translateZ="50"
-                  className="text-2xl font-semibold text-cloud sm:text-3xl"
+                  translateZ={20}
+                  as="a"
+                  href="https://github.com/siddarthx07/bookstore-react-full-stack"
+                  target="_blank"
+                  className="px-4 py-2 rounded-xl text-xs font-normal text-cloud hover:text-white transition"
                 >
-                  {project.title}
+                  GitHub →
                 </CardItem>
                 <CardItem
-                  as="p"
-                  translateZ="60"
-                  className="mt-2 text-sm leading-relaxed text-cloud/70 sm:text-base"
+                  translateZ={20}
+                  as="button"
+                  className="px-4 py-2 rounded-xl bg-white/10 text-cloud text-xs font-bold hover:bg-white/20 transition cursor-not-allowed"
                 >
-                  {project.description}
+                  Live Demo
                 </CardItem>
-
-                <CardItem translateZ="100" className="mt-4 w-full">
-                  {project.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={
-                        typeof project.image === "string"
-                          ? project.image
-                          : project.image.src
-                      }
-                      height="1000"
-                      width="1000"
-                      alt={`${project.title} preview`}
-                      className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
-                    />
-                  ) : (
-                    <div className="flex h-60 w-full items-center justify-center rounded-xl bg-night/40 text-sm uppercase tracking-[0.3em] text-cloud/30">
-                      Preview Coming Soon
-                    </div>
-                  )}
-                </CardItem>
-
-                <CardItem translateZ="30" className="mt-20">
-                  <div className="flex flex-wrap gap-2">
-                    {project.skills.slice(0, 6).map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs uppercase tracking-[0.25em] text-cloud/60"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </CardItem>
-
-                <div className="flex items-center justify-between mt-20">
-                  <CardItem translateZ={20} as={Link} href={project.links?.github || "#"} target={project.links?.github ? "_blank" : undefined} rel={project.links?.github ? "noopener noreferrer" : undefined} className={project.links?.github ? "rounded-full border border-white/20 px-5 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-cloud transition hover:border-white/40 hover:text-white" : "cursor-not-allowed rounded-full border border-white/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-cloud/40"}>
-                    {project.links?.github ? "GitHub ↗" : "GitHub · Coming Soon"}
-                  </CardItem>
-                  <CardItem translateZ={20} as={Link} href={project.links?.live || "#"} target={project.links?.live ? "_blank" : undefined} rel={project.links?.live ? "noopener noreferrer" : undefined} className={project.links?.live ? "rounded-full border border-white/20 px-5 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-cloud transition hover:border-white/40 hover:text-white" : "cursor-not-allowed rounded-full border border-white/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-cloud/40"}>
-                    {project.links?.live ? "Live Demo ↗" : "Live Demo · Coming Soon"}
-                  </CardItem>
-                </div>
-              </CardBody>
-            </CardContainer>
-          ))}
+              </div>
+            </CardBody>
+          </CardContainer>
         </div>
       </div>
     </section>

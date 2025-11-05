@@ -13,24 +13,38 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
     const container = containerRef.current;
+    const title = titleRef.current;
+    const wrapper = container?.parentElement as HTMLElement | null;
 
-    if (!section || !container) return;
+    if (!section || !container || !title) return;
 
-    // Calculate the total scroll distance needed
-    const scrollWidth = container.scrollWidth - window.innerWidth;
+    const getViewportWidth = () =>
+      wrapper?.clientWidth ?? window.innerWidth;
+    const getScrollDistance = () =>
+      Math.max(0, container.scrollWidth - getViewportWidth());
+    const getStartOffset = () => {
+      const marginBottom =
+        parseFloat(window.getComputedStyle(title).marginBottom) || 0;
+      const sectionTop = section.getBoundingClientRect().top;
+      const titleBottom = title.getBoundingClientRect().bottom;
+      return titleBottom - sectionTop + marginBottom;
+    };
 
     const scrollTween = gsap.to(container, {
-      x: -scrollWidth,
+      x: () => -getScrollDistance(),
       ease: "none",
       scrollTrigger: {
         trigger: section,
+        start: () => `top+=${getStartOffset()} top`,
         pin: true,
         scrub: 1,
-        end: () => `+=${scrollWidth}`,
+        end: () => `+=${getScrollDistance()}`,
         invalidateOnRefresh: true,
       },
     });
@@ -45,7 +59,7 @@ export default function Projects() {
     <section
       ref={sectionRef}
       id="projects"
-      className="relative overflow-hidden py-24 text-cloud sm:py-32"
+      className="relative overflow-x-hidden overflow-y-visible py-12 text-cloud sm:py-16 lg:py-20"
       style={{
         background: `
           radial-gradient(ellipse at 20% 30%, #f9731633 0%, transparent 50%),
@@ -55,7 +69,7 @@ export default function Projects() {
       }}
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mb-16 text-center">
+        <div className="mb-10 text-center sm:mb-14" ref={titleRef}>
           <TextGenerateEffect
             words="Projects"
             className="text-4xl sm:text-5xl lg:text-6xl"
@@ -63,52 +77,58 @@ export default function Projects() {
           <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-cloud/30 to-transparent" />
         </div>
 
-        <div ref={containerRef} className="flex gap-8">
+        <div
+          ref={containerRef}
+          className="flex gap-8 sm:gap-10 lg:gap-12 xl:gap-14 px-[6vw] sm:px-[8vw] lg:px-[9vw]"
+        >
           {projects.map((project, index) => (
             <div key={index} className="flex-shrink-0 flex items-center justify-center">
-              <CardContainer className="inter-var">
-                <CardBody className="group/card relative h-auto w-[30rem] min-w-[30rem] rounded-3xl border border-white/10 bg-white/[0.04] p-8 shadow-[0_25px_70px_-30px_rgba(15,23,42,0.75)]">
+              <CardContainer
+                className="inter-var"
+                containerClassName="items-start sm:items-center py-4 sm:py-6 lg:py-10"
+              >
+                <CardBody className="group/card relative h-auto w-[28rem] min-w-[28rem] sm:w-[30rem] sm:min-w-[30rem] lg:w-[34rem] lg:min-w-[34rem] xl:w-[38rem] xl:min-w-[38rem] 2xl:w-[40rem] 2xl:min-w-[40rem] rounded-3xl border border-white/10 bg-white/[0.04] p-7 sm:p-9 shadow-[0_25px_70px_-30px_rgba(15,23,42,0.75)]">
                   <CardItem
                     translateZ="50"
-                    className="text-2xl font-semibold text-cloud sm:text-3xl"
+                    className="text-3xl font-semibold text-cloud lg:text-4xl"
                   >
                     {project.title}
                   </CardItem>
                   <CardItem
                     as="p"
                     translateZ="60"
-                    className="text-cloud/70 text-sm max-w-sm mt-2 leading-relaxed"
+                    className="text-cloud/70 text-base max-w-2xl mt-4 leading-relaxed"
                   >
                     {project.description}
                   </CardItem>
-                  <CardItem translateZ="100" className="w-full mt-4">
+                  <CardItem translateZ="100" className="w-full mt-6">
                     <Image
                       src={project.image}
                       alt={project.title}
                       width={1000}
                       height={600}
-                      className="h-60 w-full object-contain rounded-xl group-hover/card:shadow-xl"
+                      className="h-80 w-full object-contain rounded-xl group-hover/card:shadow-xl"
                       quality={100}
                     />
                   </CardItem>
-                  <div className="flex flex-wrap gap-2 mt-8">
+                  <div className="flex flex-wrap gap-2.5 mt-10">
                     {project.skills.map((skill, skillIndex) => (
                       <span
                         key={skillIndex}
-                        className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs uppercase tracking-[0.25em] text-cloud/60"
+                        className="rounded-full border border-white/10 bg-white/[0.06] px-4 py-1.5 text-sm uppercase tracking-[0.25em] text-cloud/60"
                       >
                         {skill}
                       </span>
                     ))}
                   </div>
-                  <div className="flex justify-between items-center mt-8">
+                  <div className="flex justify-between items-center mt-10">
                     {project.links?.github && (
                       <CardItem
                         translateZ={20}
                         as="a"
                         href={project.links.github}
                         target="_blank"
-                        className="px-4 py-2 rounded-xl text-xs font-normal text-cloud hover:text-white transition"
+                        className="px-6 py-3 rounded-xl text-sm font-normal text-cloud hover:text-white transition"
                       >
                         GitHub →
                       </CardItem>
@@ -119,7 +139,7 @@ export default function Projects() {
                         as="a"
                         href={project.links.live}
                         target="_blank"
-                        className="px-4 py-2 rounded-xl bg-white/10 text-cloud text-xs font-bold hover:bg-white/20 transition"
+                        className="px-6 py-3 rounded-xl bg-white/10 text-cloud text-sm font-bold hover:bg-white/20 transition"
                       >
                         Live Demo
                       </CardItem>
@@ -127,7 +147,7 @@ export default function Projects() {
                       <CardItem
                         translateZ={20}
                         as="button"
-                        className="px-4 py-2 rounded-xl bg-white/10 text-cloud text-xs font-bold hover:bg-white/20 transition cursor-not-allowed"
+                        className="px-6 py-3 rounded-xl bg-white/10 text-cloud text-sm font-bold hover:bg-white/20 transition cursor-not-allowed"
                       >
                         Live Demo
                       </CardItem>

@@ -35,17 +35,17 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "Secure Enterprise Document Chatbot",
+    title: "SecureKnowledge AI",
     description:
-      "Role-aware knowledge assistant that ingests PDFs, embeds content, and serves GPT-3.5 powered answers with guardrails. Streamlit front-end, LangChain orchestration, and Firebase services deliver secure chat with full auditability.",
+      "An intelligent chatbot designed for internal enterprise use that allows employees to query company documents while maintaining strict data privacy and security controls. The system features role-based access control, AI-powered content filtering, and comprehensive audit logging",
     image: secureEnterpriseImage,
     skills: [
       "Python",
       "LangChain",
+      "RAG",
       "OpenAI GPT-3.5",
       "Streamlit",
-      "Firebase (Auth/Firestore/Storage)",
-      "FAISS",
+      "Firebase",
       "RBAC",
     ],
     links: {
@@ -55,37 +55,30 @@ export const projects: Project[] = [
   {
     title: "Real-Time Fraud Mitigation System for MCCS",
     description:
-      "Full-stack e-commerce fraud detection system combining a React analytics dashboard, Node.js services, and Python ML models running on AWS. Reduces false positives by 30% via Optuna-tuned ensembles and ships a role-based MERN admin console.",
+      "Full-stack e-commerce fraud detection system combining a React analytics dashboard, Node.js services, and Python ML models running on AWS. Reduces false positives by 30%.",
     image: mccsImage,
     skills: [
-      "React 18",
+      "React.js",
       "Node.js",
       "Express.js",
-      "MongoDB & Mongoose",
+      "MongoDB",
       "JWT Auth",
-      "Python ML (XGBoost, Random Forest, Logistic Regression)",
-      "Optuna",
-      "TailwindCSS",
-      "Jest & Supertest",
-      "AWS (SageMaker, EC2, S3)",
+      "AWS",
     ],
   },
   {
     title: "AI Cover Letter Assistant",
     description:
-      "Chrome extension that extracts job details from Glassdoor and Greenhouse, analyzes your resume, and generates Gemini-powered cover letters. Auto-fills application forms or exports HTML for manual upload to streamline submissions.",
+      "Chrome extension that extracts job details Greenhouse, analyzes your resume, and generates Gemini-powered cover letters. Auto-fills application forms or exports HTML for manual upload to streamline submissions.",
     image: aiCoverLetterImage,
     skills: [
       "JavaScript",
+      "REST APIs",
       "Chrome Extension MV3",
       "Google Gemini API",
       "DOM Manipulation",
-      "REST APIs",
       "Async/Await",
-      "HTML & CSS",
       "Web Scraping",
-      "Chrome Storage API",
-      "Object-Oriented Patterns",
     ],
     links: {
       github: "https://github.com/siddarthx07/ai-job-application-helper",

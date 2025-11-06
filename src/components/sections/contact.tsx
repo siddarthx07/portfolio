@@ -77,9 +77,6 @@ export default function Contact() {
             className="text-4xl sm:text-5xl lg:text-6xl"
           />
           <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-cloud/30 to-transparent" />
-          <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-cloud/70 leading-relaxed">
-            Have a project in mind or want to collaborate? I'd love to hear from you!
-          </p>
         </div>
 
         {/* Availability Badge */}
@@ -96,7 +93,7 @@ export default function Contact() {
         </div>
 
         <div className="mx-auto max-w-5xl">
-          <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">
+          <div className="grid gap-12 lg:grid-cols-5 lg:gap-16 lg:items-start">
             {/* Contact Form */}
             <div className="lg:col-span-3">
               <div className="rounded-3xl border border-white/10 bg-slate-900/50 p-8 sm:p-10 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur">
@@ -181,7 +178,7 @@ export default function Contact() {
                       required
                       rows={6}
                       className="w-full rounded-xl border border-white/10 bg-slate-800/50 px-4 py-3 text-cloud placeholder:text-cloud/40 focus:border-white/30 focus:outline-none focus:ring-2 focus:ring-white/10 transition resize-none"
-                      placeholder="Tell me about your project or idea..."
+                      placeholder="Your message..."
                     />
                   </div>
 
@@ -213,9 +210,9 @@ export default function Contact() {
             </div>
 
             {/* Contact Info Sidebar */}
-            <div className="space-y-8 lg:col-span-2">
+            <div className="flex flex-col gap-6 lg:col-span-2 lg:h-full lg:justify-between">
               {/* Direct Email */}
-              <div className="rounded-3xl border border-white/10 bg-slate-900/50 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur">
+              <div className="rounded-3xl border border-white/10 bg-slate-900/50 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur flex-1 flex flex-col justify-center">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
                   <Mail className="h-6 w-6 text-cloud" />
                 </div>
@@ -229,7 +226,7 @@ export default function Contact() {
               </div>
 
               {/* Social Links */}
-              <div className="rounded-3xl border border-white/10 bg-slate-900/50 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur">
+              <div className="rounded-3xl border border-white/10 bg-slate-900/50 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur flex-1 flex flex-col justify-center">
                 <h3 className="mb-6 text-xl font-semibold text-cloud">Connect With Me</h3>
                 <div className="space-y-4">
                   {contactInfo.social.map((social) => {
@@ -251,7 +248,7 @@ export default function Contact() {
               </div>
 
               {/* Resume Download */}
-              <div className="rounded-3xl border border-white/10 bg-slate-900/50 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur">
+              <div className="rounded-3xl border border-white/10 bg-slate-900/50 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur flex-1 flex flex-col justify-center">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
                   <Download className="h-6 w-6 text-cloud" />
                 </div>

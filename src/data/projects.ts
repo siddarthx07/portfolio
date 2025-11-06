@@ -69,7 +69,7 @@ export const projects: Project[] = [
   {
     title: "AI Cover Letter Assistant",
     description:
-      "Chrome extension that extracts job details Greenhouse, analyzes your resume, and generates Gemini-powered cover letters. Auto-fills application forms or exports HTML for manual upload to streamline submissions.",
+      "Smart extension that crafts personalized cover letters and instantly fills Greenhouse job applications using your saved resume details.",
     image: aiCoverLetterImage,
     skills: [
       "JavaScript",

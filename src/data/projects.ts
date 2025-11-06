@@ -28,10 +28,11 @@ export const projects: Project[] = [
       "Context API",
       "Java (JAX-RS)",
       "JDBC",
-      "Gradle",
+      "MySQL",
     ],
     links: {
       github: "https://github.com/siddarthx07/bookstore-react-full-stack",
+      live: "https://bookstore-react-full-stack-production.up.railway.app/",
     },
   },
   {
@@ -75,10 +76,9 @@ export const projects: Project[] = [
       "JavaScript",
       "REST APIs",
       "Gemini API",
-      "Async/Await",
-      "DOM Manipulation",
-      "Web Scraping",
       "Chrome Extension MV3",
+      
+      "DOM Manipulation",
     ],
     links: {
       github: "https://github.com/siddarthx07/ai-job-application-helper",

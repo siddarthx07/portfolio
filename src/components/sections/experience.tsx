@@ -44,8 +44,8 @@ const experience: ExperienceEntry[] = [
     highlight:
       "Modernized research workflows with faster batch processing and reusable UI patterns.",
     bullets: [
-      "Optimized Java workflows with multithreading to accelerate data processing by 25%.",
-      "Delivered React component library that cut reporting defects by 50%.",
+      "Optimized Java workflows using multithreading, reducing batch data processing time by 25%.",
+      "Built a reusable React component library that improved code consistency and reduced reporting defects by 50%.",
     ],
     stack: ["Java", "React", "Spring", "PostgreSQL"],
   },

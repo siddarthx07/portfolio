@@ -27,12 +27,27 @@ export default function Projects() {
       wrapper?.clientWidth ?? window.innerWidth;
     const getScrollDistance = () =>
       Math.max(0, container.scrollWidth - getViewportWidth());
-    const getStartOffset = () => {
+    const getTitleOffset = () => {
       const marginBottom =
         parseFloat(window.getComputedStyle(title).marginBottom) || 0;
-      const sectionTop = section.getBoundingClientRect().top;
-      const titleBottom = title.getBoundingClientRect().bottom;
-      return titleBottom - sectionTop + marginBottom;
+      const titleRect = title.getBoundingClientRect();
+      const sectionRect = section.getBoundingClientRect();
+      return titleRect.height + (titleRect.top - sectionRect.top) + marginBottom;
+    };
+
+    const getStartPosition = () => {
+      const baseOffset = getTitleOffset();
+      const containerHeight = container.getBoundingClientRect().height;
+      const viewportHeight = window.innerHeight;
+      const centerOffset = Math.max(0, (viewportHeight - containerHeight) / 2);
+      const offset = baseOffset - centerOffset;
+      const absoluteOffset = Math.abs(offset).toFixed(2);
+
+      if (offset >= 0) {
+        return `top+=${absoluteOffset} top`;
+      }
+
+      return `top-=${absoluteOffset} top`;
     };
 
     const scrollTween = gsap.to(container, {
@@ -40,7 +55,7 @@ export default function Projects() {
       ease: "none",
       scrollTrigger: {
         trigger: section,
-        start: () => `top+=${getStartOffset()} top`,
+        start: getStartPosition,
         pin: true,
         scrub: 1,
         end: () => `+=${getScrollDistance()}`,
@@ -78,13 +93,10 @@ export default function Projects() {
 
         <div
           ref={containerRef}
-          className="flex gap-8 sm:gap-10 lg:gap-12 xl:gap-14 px-[6vw] sm:px-[8vw] lg:px-[9vw]"
+          className="flex gap-12 sm:gap-16 lg:gap-20 xl:gap-24 px-[6vw] sm:px-[8vw] lg:px-[9vw]"
         >
           {projects.map((project, index) => {
-            const imageClass =
-              index === 1 || index === 2
-                ? "w-full object-cover rounded-xl group-hover/card:shadow-xl"
-                : "h-80 w-full object-contain rounded-xl group-hover/card:shadow-xl";
+            const imageClass = "h-80 w-full object-contain rounded-xl group-hover/card:shadow-xl";
 
             return (
               <div key={index} className="flex-shrink-0 flex items-center justify-center">
@@ -92,7 +104,7 @@ export default function Projects() {
                   className="inter-var"
                   containerClassName="items-start sm:items-center py-4 sm:py-6 lg:py-10"
                 >
-                  <CardBody className="group/card relative h-auto w-[28rem] min-w-[28rem] sm:w-[30rem] sm:min-w-[30rem] lg:w-[34rem] lg:min-w-[34rem] xl:w-[38rem] xl:min-w-[38rem] 2xl:w-[40rem] 2xl:min-w-[40rem] rounded-3xl border border-white/10 p-7 sm:p-9">
+                  <CardBody className="group/card relative h-auto w-[28rem] min-w-[28rem] sm:w-[30rem] sm:min-w-[30rem] lg:w-[34rem] lg:min-w-[34rem] xl:w-[38rem] xl:min-w-[38rem] 2xl:w-[40rem] 2xl:min-w-[40rem] rounded-3xl border border-white/10 px-6 py-7 sm:px-8 sm:py-8">
                     <CardItem
                       translateZ="50"
                       className="text-3xl font-semibold text-cloud lg:text-4xl"
@@ -116,7 +128,7 @@ export default function Projects() {
                         quality={100}
                       />
                     </CardItem>
-                    <div className="flex flex-wrap gap-2.5 mt-10">
+                    <div className="flex flex-wrap gap-2.5 mt-8">
                       {project.skills.map((skill, skillIndex) => (
                         <span
                           key={skillIndex}
@@ -126,7 +138,7 @@ export default function Projects() {
                         </span>
                       ))}
                     </div>
-                    <div className="flex justify-between items-center mt-10">
+                    <div className="flex flex-wrap items-center gap-4 mt-8">
                       {project.links?.github && (
                         <CardItem
                           translateZ={20}

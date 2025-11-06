@@ -150,24 +150,26 @@ export default function Projects() {
                           GitHub →
                         </CardItem>
                       )}
-                      {project.links?.live ? (
-                        <CardItem
-                          translateZ={20}
-                          as="a"
-                          href={project.links.live}
-                          target="_blank"
-                          className="px-6 py-3 rounded-xl bg-white/10 text-cloud text-sm font-bold hover:bg-white/20 transition"
-                        >
-                          Live Demo
-                        </CardItem>
-                      ) : (
-                        <CardItem
-                          translateZ={20}
-                          as="button"
-                          className="px-6 py-3 rounded-xl bg-white/10 text-cloud text-sm font-bold hover:bg-white/20 transition cursor-not-allowed"
-                        >
-                          Live Demo
-                        </CardItem>
+                      {index !== 2 && index !== 3 && (
+                        project.links?.live ? (
+                          <CardItem
+                            translateZ={20}
+                            as="a"
+                            href={project.links.live}
+                            target="_blank"
+                            className="px-6 py-3 rounded-xl bg-white/10 text-cloud text-sm font-bold hover:bg-white/20 transition"
+                          >
+                            Live Demo
+                          </CardItem>
+                        ) : (
+                          <CardItem
+                            translateZ={20}
+                            as="button"
+                            className="px-6 py-3 rounded-xl bg-white/10 text-cloud text-sm font-bold hover:bg-white/20 transition cursor-not-allowed"
+                          >
+                            Live Demo
+                          </CardItem>
+                        )
                       )}
                     </div>
                   </CardBody>

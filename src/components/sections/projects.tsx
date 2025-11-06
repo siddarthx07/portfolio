@@ -92,7 +92,7 @@ export default function Projects() {
                   className="inter-var"
                   containerClassName="items-start sm:items-center py-4 sm:py-6 lg:py-10"
                 >
-                  <CardBody className="group/card relative h-auto w-[28rem] min-w-[28rem] sm:w-[30rem] sm:min-w-[30rem] lg:w-[34rem] lg:min-w-[34rem] xl:w-[38rem] xl:min-w-[38rem] 2xl:w-[40rem] 2xl:min-w-[40rem] rounded-3xl border border-white/10 bg-white/[0.04] p-7 sm:p-9 shadow-[0_25px_70px_-30px_rgba(15,23,42,0.75)]">
+                  <CardBody className="group/card relative h-auto w-[28rem] min-w-[28rem] sm:w-[30rem] sm:min-w-[30rem] lg:w-[34rem] lg:min-w-[34rem] xl:w-[38rem] xl:min-w-[38rem] 2xl:w-[40rem] 2xl:min-w-[40rem] rounded-3xl border border-white/10 p-7 sm:p-9">
                     <CardItem
                       translateZ="50"
                       className="text-3xl font-semibold text-cloud lg:text-4xl"

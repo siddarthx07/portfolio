@@ -1,7 +1,7 @@
 import type { StaticImageData } from "next/image";
 
 import bookstoreProjectImage from "../../public/bookstore-project.png";
-import secureEnterpriseImage from "../../public/Secure-Enterpirse-chatbot-1.png";
+import secureEnterpriseImage from "../../public/Secure-Enterpirse-chatbot-2.png";
 import mccsImage from "../../public/MCCS-2.png";
 import aiCoverLetterImage from "../../public/AI-Cover-Letter-Assistant.png";
 
@@ -20,7 +20,7 @@ export const projects: Project[] = [
   {
     title: "Bookstore React Full Stack",
     description:
-      "End-to-end bookstore platform pairing a React + TypeScript client with a Java JAX-RS API. Supports category browsing, detailed product pages, secure checkout, and transactional order management backed by relational storage.",
+      "An e-commerce bookstore application for browsing books by category, managing a shopping cart, and completing purchases with order confirmation.",
     image: bookstoreProjectImage,
     skills: [
       "React 18",
@@ -35,9 +35,9 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "SecureKnowledge AI",
+    title: "Enterprise ChatDoc",
     description:
-      "An intelligent chatbot designed for internal enterprise use that allows employees to query company documents while maintaining strict data privacy and security controls. The system features role-based access control, AI-powered content filtering, and comprehensive audit logging",
+      "Secure enterprise document chatbot with role-based access control, AI content filtering, and audit logging for employee queries.",
     image: secureEnterpriseImage,
     skills: [
       "Python",
@@ -53,9 +53,9 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "Real-Time Fraud Mitigation System for MCCS",
+    title: "FraudGuard AI",
     description:
-      "Full-stack e-commerce fraud detection system combining a React analytics dashboard, Node.js services, and Python ML models running on AWS. Reduces false positives by 30%.",
+      "Detects fraudulent online transactions through predictive models, providing merchants with instant alerts and detailed analytics to prevent financial losses.",
     image: mccsImage,
     skills: [
       "React.js",

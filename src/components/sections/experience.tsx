@@ -30,7 +30,7 @@ const experience: ExperienceEntry[] = [
     yearLabel: "MAY 2025 – JUL 2025",
     heading: "Software Engineer Intern",
     highlight:
-      "Delivered a compliance-ready enterprise chatbot that cut PDF search time for finance teams by 60%.",
+      "Delivered a compliance-ready enterprise chatbot that cut PDF search time for employees by 60%.",
     bullets: [
       "Integrated LangChain + FAISS pipelines with RBAC and audit logging for zero data policy violations.",
       "Scaled Firebase ingestion to 1,000+ documents while sustaining low-latency responses for concurrent teams.",
@@ -53,11 +53,11 @@ const experience: ExperienceEntry[] = [
 
 function TechPills({ items }: { items: string[] }) {
   return (
-    <div className="mt-5 flex flex-wrap gap-2">
+    <div className="mt-8 flex flex-wrap gap-3">
       {items.map((tech) => (
         <span
           key={tech}
-          className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.25em] text-cloud/60"
+          className="rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm sm:text-base uppercase tracking-[0.25em] text-cloud/60"
         >
           {tech}
         </span>
@@ -70,21 +70,21 @@ export default function Experience() {
   const timelineData: TimelineEntry[] = experience.map((item) => ({
     title: item.yearLabel,
     content: (
-      <div className="mt-6 rounded-3xl border border-white/10 bg-slate-900/50 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur">
-        <div className="space-y-2 text-left">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-cloud/60 sm:text-sm">
+      <div className="mt-6 rounded-3xl border border-white/10 bg-slate-900/50 p-10 sm:p-12 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur">
+        <div className="space-y-3 text-left">
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-cloud/60 sm:text-base">
             {item.period}
           </p>
-          <h3 className="text-xl font-semibold text-cloud sm:text-2xl">
+          <h3 className="text-2xl font-semibold text-cloud sm:text-3xl lg:text-4xl">
             {item.heading}
           </h3>
         </div>
-        <p className="mt-4 text-lg font-semibold text-cloud">{item.highlight}</p>
-        <ul className="mt-5 space-y-2 text-sm text-cloud/70">
+        <p className="mt-6 text-xl font-semibold text-cloud sm:text-2xl leading-relaxed">{item.highlight}</p>
+        <ul className="mt-8 space-y-4 text-base sm:text-lg text-cloud/70">
           {item.bullets.map((bullet) => (
-            <li key={bullet} className="flex gap-2">
-              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-cloud/60" />
-              <span>{bullet}</span>
+            <li key={bullet} className="flex gap-3">
+              <span className="mt-2 h-2 w-2 rounded-full bg-cloud/60 flex-shrink-0" />
+              <span className="leading-relaxed">{bullet}</span>
             </li>
           ))}
         </ul>

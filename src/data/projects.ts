@@ -2,7 +2,7 @@ import type { StaticImageData } from "next/image";
 
 import bookstoreProjectImage from "../../public/bookstore-project.png";
 import secureEnterpriseImage from "../../public/Secure-Enterpirse-chatbot-2.png";
-import mccsImage from "../../public/MCCS-2.png";
+import mccsImage from "../../public/MCCS-3.png";
 import aiCoverLetterImage from "../../public/AI-Cover-Letter-Assistant.png";
 
 export type Project = {

@@ -10,7 +10,7 @@ type VantaEffectInstance = {
   destroy: () => void;
 };
 
-const NAV_LINKS = ["About", "Experience", "Projects", "Skills", "Contact"];
+const NAV_LINKS = ["About", "Experience", "Projects", "Contact"];
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

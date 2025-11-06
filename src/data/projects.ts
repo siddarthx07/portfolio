@@ -55,7 +55,7 @@ export const projects: Project[] = [
   {
     title: "FraudGuard AI",
     description:
-      "Detects fraudulent online transactions through predictive models, providing merchants with instant alerts and detailed analytics to prevent financial losses.",
+      "Detects fraudulent online transactions through predictive models, providing merchants with instant alerts and analytics to prevent financial losses.",
     image: mccsImage,
     skills: [
       "React.js",

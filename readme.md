@@ -1,64 +1,88 @@
 # Siddarth Bandi – Portfolio
 
-Immersive, animation-led portfolio showcasing scalable full-stack systems and AI-driven experiences.
+Modern, interactive portfolio showcasing full-stack development expertise and AI-driven projects with immersive animations and responsive design.
 
 ## Quick Start
 
-- `npm install` – install dependencies.  
-- `npm run dev` – launch Next.js dev server on http://localhost:3000.  
-- `npm run build && npm start` – production bundle & preview.  
-- `npm run lint` – static analysis with ESLint and Next rules.
+- `npm install` – install dependencies  
+- `npm run dev` – launch Next.js dev server on http://localhost:3000  
+- `npm run build && npm start` – production bundle & preview  
+- `npm run lint` – static analysis with ESLint
 
-## Core Frontend Stack
+## Core Technology Stack
 
-- **Framework**: Next.js 16 (App Router) with React Server Components for hybrid rendering.
-- **Language**: TypeScript for explicit component contracts while orchestrating animation libraries.
-- **Styling**: Tailwind CSS v4 + CSS variables for theming, paired with Space Grotesk headings and Geist body.
-- **Motion Layer**: Framer Motion (micro-interactions), GSAP + ScrollTrigger (story beats), Lenis (smooth scroll).
-- **3D Layer**: `@splinetool/react-spline` for exported hero scenes, `@react-three/fiber` + `drei` reserved for bespoke visual modules.
-- **State & Tooling**: Lightweight client state via Zustand/Jotai when animation sync is required; ESLint + TypeScript for quality gates.
+- **Framework**: Next.js 16.0.1 (App Router) with React 19.2.0
+- **Language**: TypeScript for type-safe development
+- **Styling**: Tailwind CSS v4 with responsive design system
+- **Animations**: GSAP 3.13.0 for scroll-triggered animations and transitions
+- **Motion**: Motion library for smooth micro-interactions
+- **3D Graphics**: Three.js 0.173.0 with Vanta.js for animated backgrounds
+- **Icons**: Lucide React for consistent iconography
+- **Forms**: EmailJS for contact form functionality
 
-## 3D & Visual Libraries
+## Portfolio Features
 
-| Feature | Tool | Why use it |
-| --- | --- | --- |
-| 3D scenes | Spline 3D | Export interactive canvases straight into React/Next embeds. |
-| Low-level 3D | Three.js | Fine-grained control over particles, lighting, and physics. |
-| Model rendering in React | @react-three/fiber + drei | Declarative 3D scene graph that plays nicely with React. |
-| Animated backgrounds | Vanta.js | Lightweight preset 3D backgrounds for supporting sections. |
-| Particle systems | tsparticles / Particles.js | Purpose-built hero particles or logo reveals. |
+### 🏠 Hero Section
+- Interactive 3D background with Vanta.js animations
+- Responsive design with mobile-optimized layouts
+- Smooth scroll-triggered animations using GSAP
 
-## Scroll & Motion Libraries
+### 👨‍💻 About Section
+- Personal introduction with animated timeline
+- Skills showcase with interactive elements
+- Professional background and expertise
 
-| Type | Library | Use case |
-| --- | --- | --- |
-| Timeline-based animation | GSAP (GreenSock) | Scroll orchestration, parallax, morphing sequences. |
-| Scroll interactions | Lenis / Locomotive Scroll | Smooth inertia and scroll-linked variables. |
-| Motion in React | Framer Motion | Component-level transitions, hovers, and staggers. |
-| 3D scroll storytelling | GSAP ScrollTrigger | Scroll-driven stage transitions coordinating with 3D. |
+### 💼 Experience Section
+- Timeline-based work history display
+- Animated skill tags and descriptions
+- Responsive design for all screen sizes
 
-## Styling & Design
+### 🚀 Projects Section
+- Showcase of featured projects with live demos
+- Interactive project cards with hover effects
+- Technology stack badges for each project
 
-| Tool | Why it is used |
-| --- | --- |
-| Tailwind CSS | Utility-first iteration across breakpoints and themes. |
-| ShadCN UI / Radix UI | Accessible, polished primitives for overlays and navigation. |
-| CSS Variables + Lenis | Theme tokens that respond to scroll velocity and section focus. |
+### 📧 Contact Section
+- Functional contact form powered by EmailJS
+- Social media links and professional profiles
+- Animated form validation and submission feedback
 
-## Hero Integration (Current State)
+## Featured Projects
 
-- Spline hero scene embedded via `@splinetool/react-spline/next`.
-- Gradient overlays, uppercase typographic system, and conic-accent marker inspired by the provided mood board.
-- Dark, cinematic palette with drop shadows that echo the Spline lighting.
-- **Mobile-responsive design** with optimized performance and user experience across devices.
+### 🛒 Bookstore React Full Stack
+E-commerce bookstore application with shopping cart functionality and order management.
+- **Tech Stack**: React 18, TypeScript, Java (JAX-RS), MySQL
+- **Features**: Category browsing, cart management, order confirmation
+- **Links**: [Live Demo](https://bookstore-react-full-stack-production.up.railway.app/) | [GitHub](https://github.com/siddarthx07/bookstore-react-full-stack)
 
-### Mobile View Implementation
+### 🤖 Enterprise ChatDoc
+Secure enterprise document chatbot with role-based access control and AI content filtering.
+- **Tech Stack**: Python, LangChain, RAG, OpenAI GPT-3.5, Streamlit, Firebase
+- **Features**: Document querying, audit logging, RBAC security
+- **Links**: [GitHub](https://github.com/siddarthx07/Secure-Enterprise-Document-Chatbot)
 
-- **Responsive Navigation**: Desktop navigation bar transforms into a hamburger menu on mobile devices with smooth animations and backdrop blur effects.
-- **Performance Optimization**: Spline 3D scene is hidden on mobile (`hidden md:block`) to improve loading times and performance on smaller devices.
-- **Mobile-Specific Content**: Dedicated mobile hero section with optimized typography and spacing for smaller screens.
-- **Adaptive Backgrounds**: Gradient background for mobile devices while maintaining the 3D scene on desktop.
-- **Responsive Typography**: Scaled text sizes and tracking optimized for mobile readability (`text-4xl` on mobile vs larger on desktop).
-- **Touch-Friendly Interface**: Mobile menu items with appropriate tap targets and hover states adapted for touch interactions.
+### 🛡️ FraudGuard AI
+AI-powered fraud detection system for online transactions with real-time alerts.
+- **Tech Stack**: React.js, Node.js, Express.js, MongoDB, JWT Auth, AWS
+- **Features**: Predictive modeling, instant alerts, merchant analytics
 
-Upcoming steps will expand the landing flow into narrative sections (about, case studies, tech stack) with coordinated scroll and motion cues.
+### 📝 AI Cover Letter Assistant
+Chrome extension that generates personalized cover letters and auto-fills job applications.
+- **Tech Stack**: JavaScript, Gemini API, Chrome Extension MV3, DOM Manipulation
+- **Features**: Resume parsing, personalized content generation, form automation
+- **Links**: [GitHub](https://github.com/siddarthx07/ai-job-application-helper)
+
+## Mobile-First Design
+
+- **Responsive Navigation**: Hamburger menu with smooth animations and backdrop blur
+- **Performance Optimized**: Conditional 3D rendering based on device capabilities
+- **Touch-Friendly**: Optimized tap targets and gesture-based interactions
+- **Adaptive Typography**: Scaled text and spacing for mobile readability
+- **Progressive Enhancement**: Core functionality works across all devices
+
+## Development & Deployment
+
+- **Development**: Hot-reload development server with TypeScript support
+- **Build**: Optimized production builds with Next.js static generation
+- **Linting**: ESLint configuration with Next.js best practices
+- **Styling**: Utility-first CSS with Tailwind's design system

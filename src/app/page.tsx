@@ -51,7 +51,7 @@ export default function Home() {
         const effect = VANTA({
           el: vantaContainerRef.current,
           THREE,
-          mouseControls: true,
+          mouseControls: false,
           touchControls: false,
           gyroControls: false,
           minHeight: 200.0,
@@ -64,7 +64,7 @@ export default function Home() {
           cloudShadowColor: 0x0f172a,
           sunColor: 0xfacc15,
           sunGlareColor: 0xf97316,
-          speed: 0.75,
+          speed: 0,
         });
 
         vantaEffectRef.current = effect as VantaEffectInstance;

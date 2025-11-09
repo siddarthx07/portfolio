@@ -73,6 +73,15 @@ Chrome extension that generates personalized cover letters and auto-fills job ap
 - **Features**: Resume parsing, personalized content generation, form automation
 - **Links**: [GitHub](https://github.com/siddarthx07/ai-job-application-helper)
 
+## Performance Optimizations
+
+- **Smart Animation Pausing**: Vanta.js automatically pauses when scrolled out of view using Intersection Observer
+- **Tab Visibility Detection**: Animations pause when browser tab is hidden to save resources
+- **Mobile-Specific Settings**: Reduced scale (0.7), slower speed (0.4), and lower render distance (12.0) on mobile devices
+- **Adaptive Controls**: Mouse interactions disabled on mobile to reduce CPU/GPU overhead
+- **Lazy Loading**: Three.js and Vanta.js dynamically imported only when needed
+- **Accessibility First**: Respects prefers-reduced-motion to disable animations for users who need it
+
 ## Mobile-First Design
 
 - **Responsive Navigation**: Hamburger menu with smooth animations and backdrop blur

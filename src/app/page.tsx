@@ -9,6 +9,8 @@ import Contact from "@/components/sections/contact";
 
 type VantaEffectInstance = {
   destroy: () => void;
+  pause?: () => void;
+  resume?: () => void;
 };
 
 const NAV_LINKS = ["About", "Experience", "Projects", "Contact"];
@@ -32,6 +34,7 @@ export default function Home() {
     }
 
     let mounted = true;
+    let observer: IntersectionObserver | null = null;
 
     const initVanta = async () => {
       if (!vantaContainerRef.current || vantaEffectRef.current) {
@@ -48,35 +51,73 @@ export default function Home() {
           return;
         }
 
+        // Detect mobile/tablet for performance optimizations
+        const isMobile = window.innerWidth < 1024;
+
         const effect = VANTA({
           el: vantaContainerRef.current,
           THREE,
-          mouseControls: false,
+          mouseControls: false, // Disable on mobile
           touchControls: false,
           gyroControls: false,
           minHeight: 200.0,
           minWidth: 200.0,
-          scale: 1.0,
-          scaleMobile: 1.0,
+          scale: isMobile ? 0.7 : 1.0, // Lower scale on mobile
+          scaleMobile: 0.7,
           texturePath: "https://cdn.jsdelivr.net/npm/vanta/dist/",
           skyColor: 0x05080f,
           cloudColor: 0x9ca3af,
           cloudShadowColor: 0x0f172a,
           sunColor: 0xfacc15,
           sunGlareColor: 0xf97316,
-          speed: 0,
+          speed: isMobile ? 0.4 : 0.6, // Slower on mobile
+          // Performance optimizations
+          maxDistance: isMobile ? 12.0 : 20.0, // Reduce render distance
         });
 
         vantaEffectRef.current = effect as VantaEffectInstance;
+
+        // Pause animation when scrolled away (HUGE performance win)
+        observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (vantaEffectRef.current) {
+                if (entry.isIntersecting) {
+                  vantaEffectRef.current.resume?.();
+                } else {
+                  vantaEffectRef.current.pause?.();
+                }
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        if (vantaContainerRef.current) {
+          observer.observe(vantaContainerRef.current);
+        }
       } catch (error) {
         console.error("Failed to initialize Vanta clouds", error);
       }
     };
 
+    // Pause when tab is hidden
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        vantaEffectRef.current?.pause?.();
+      } else {
+        vantaEffectRef.current?.resume?.();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     initVanta();
 
     return () => {
       mounted = false;
+      observer?.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       vantaEffectRef.current?.destroy();
       vantaEffectRef.current = null;
     };

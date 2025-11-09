@@ -23,8 +23,9 @@ Modern, interactive portfolio showcasing full-stack development expertise and AI
 ## Portfolio Features
 
 ### 🏠 Hero Section
-- Interactive 3D background with Vanta.js animations
-- Responsive design with mobile-optimized layouts
+- Interactive 3D background with Vanta.js cloud animations
+- Performance optimized with auto-pause when scrolled away or tab hidden
+- Responsive design with mobile-optimized layouts and reduced rendering quality
 - Smooth scroll-triggered animations using GSAP
 
 ### 👨‍💻 About Section

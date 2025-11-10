@@ -5,10 +5,6 @@ import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { projects } from "@/data/projects";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -23,49 +19,74 @@ export default function Projects() {
 
     if (!section || !container || !title) return;
 
-    const getViewportWidth = () =>
-      wrapper?.clientWidth ?? window.innerWidth;
-    const getScrollDistance = () =>
-      Math.max(0, container.scrollWidth - getViewportWidth());
-    const getTitleOffset = () => {
-      const marginBottom =
-        parseFloat(window.getComputedStyle(title).marginBottom) || 0;
-      const titleRect = title.getBoundingClientRect();
-      const sectionRect = section.getBoundingClientRect();
-      return titleRect.height + (titleRect.top - sectionRect.top) + marginBottom;
-    };
+    // Lazy load GSAP only when component is mounted
+    let scrollTween: { scrollTrigger?: { kill: () => void }; kill: () => void } | null = null;
 
-    const getStartPosition = () => {
-      const baseOffset = getTitleOffset();
-      const containerHeight = container.getBoundingClientRect().height;
-      const viewportHeight = window.innerHeight;
-      const centerOffset = Math.max(0, (viewportHeight - containerHeight) / 2);
-      const offset = baseOffset - centerOffset;
-      const absoluteOffset = Math.abs(offset).toFixed(2);
+    const initGSAP = async () => {
+      try {
+        const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+          import("gsap"),
+          import("gsap/ScrollTrigger"),
+        ]);
 
-      if (offset >= 0) {
-        return `top+=${absoluteOffset} top`;
+        gsap.registerPlugin(ScrollTrigger);
+
+        const getViewportWidth = () =>
+          wrapper?.clientWidth ?? window.innerWidth;
+        const getScrollDistance = () =>
+          Math.max(0, container.scrollWidth - getViewportWidth());
+        const getTitleOffset = () => {
+          const marginBottom =
+            parseFloat(window.getComputedStyle(title).marginBottom) || 0;
+          const titleRect = title.getBoundingClientRect();
+          const sectionRect = section.getBoundingClientRect();
+          return (
+            titleRect.height + (titleRect.top - sectionRect.top) + marginBottom
+          );
+        };
+
+        const getStartPosition = () => {
+          const baseOffset = getTitleOffset();
+          const containerHeight = container.getBoundingClientRect().height;
+          const viewportHeight = window.innerHeight;
+          const centerOffset = Math.max(
+            0,
+            (viewportHeight - containerHeight) / 2
+          );
+          const offset = baseOffset - centerOffset;
+          const absoluteOffset = Math.abs(offset).toFixed(2);
+
+          if (offset >= 0) {
+            return `top+=${absoluteOffset} top`;
+          }
+
+          return `top-=${absoluteOffset} top`;
+        };
+
+        scrollTween = gsap.to(container, {
+          x: () => -getScrollDistance(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: getStartPosition,
+            pin: true,
+            scrub: 1,
+            end: () => `+=${getScrollDistance()}`,
+            invalidateOnRefresh: true,
+          },
+        });
+      } catch (error) {
+        console.error("Failed to load GSAP:", error);
       }
-
-      return `top-=${absoluteOffset} top`;
     };
 
-    const scrollTween = gsap.to(container, {
-      x: () => -getScrollDistance(),
-      ease: "none",
-      scrollTrigger: {
-        trigger: section,
-        start: getStartPosition,
-        pin: true,
-        scrub: 1,
-        end: () => `+=${getScrollDistance()}`,
-        invalidateOnRefresh: true,
-      },
-    });
+    initGSAP();
 
     return () => {
-      scrollTween.scrollTrigger?.kill();
-      scrollTween.kill();
+      if (scrollTween) {
+        scrollTween.scrollTrigger?.kill();
+        scrollTween.kill();
+      }
     };
   }, []);
 

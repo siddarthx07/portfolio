@@ -77,7 +77,6 @@ export const projects: Project[] = [
       "REST APIs",
       "Gemini API",
       "Chrome Extension MV3",
-      
       "DOM Manipulation",
     ],
     links: {

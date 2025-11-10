@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import About from "@/components/sections/about";
-import Experience from "@/components/sections/experience";
-import Projects from "@/components/sections/projects";
-import Contact from "@/components/sections/contact";
+import { useEffect, useRef, useState, lazy, Suspense } from "react";
+
+// Lazy load heavy section components
+const About = lazy(() => import("@/components/sections/about"));
+const Experience = lazy(() => import("@/components/sections/experience"));
+const Projects = lazy(() => import("@/components/sections/projects"));
+const Contact = lazy(() => import("@/components/sections/contact"));
 
 type VantaEffectInstance = {
   destroy: () => void;
@@ -239,11 +241,19 @@ export default function Home() {
         </div>
       </main>
 
-      {/* About Section */}
-      <About />
-      <Experience />
-      <Projects />
-      <Contact />
+      {/* Lazy-loaded Sections with Intersection Observer */}
+      <Suspense
+        fallback={
+          <div className="flex min-h-[400px] items-center justify-center">
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-cloud/20 border-t-cloud/60" />
+          </div>
+        }
+      >
+        <About />
+        <Experience />
+        <Projects />
+        <Contact />
+      </Suspense>
     </>
   );
 }

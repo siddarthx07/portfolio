@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, FormEvent } from "react";
-import emailjs from "@emailjs/browser";
 import { Github, Linkedin, Mail, Download, CheckCircle2, AlertCircle } from "lucide-react";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { contactInfo } from "@/data/contact";
@@ -28,6 +27,9 @@ export default function Contact() {
     setSubmitStatus("idle");
 
     try {
+      // Lazy load EmailJS only when form is submitted
+      const emailjs = (await import("@emailjs/browser")).default;
+      
       await emailjs.sendForm(
         "service_dgm98ae",
         "template_46up75u",

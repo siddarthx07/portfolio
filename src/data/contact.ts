@@ -1,6 +1,6 @@
 export const contactInfo = {
   email: "siddarthbandi2025@gmail.com",
-  availability: "ACTIVELY SEEKING FULL-TIME 2026 MAY OPPORTUNITIES IN USA",
+  availability: "Actively seeking May 2026 full-time opportunities in the USA",
   social: [
     {
       name: "LinkedIn",
@@ -14,7 +14,7 @@ export const contactInfo = {
     },
   ],
   resume: {
-    url: "/resume.pdf",
+    url: "https://drive.google.com/file/d/1xd91wVOO-snEIQ-nffthl2Nrpi9nopV0/view",
     filename: "Siddarth_Bandi_Resume.pdf",
   },
 };

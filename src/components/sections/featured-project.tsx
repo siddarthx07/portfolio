@@ -7,6 +7,7 @@ import Image from "next/image";
 export default function FeaturedProject() {
   return (
     <section
+      id="projects"
       className="text-cloud"
       style={{
         background: `
@@ -26,12 +27,22 @@ export default function FeaturedProject() {
             </>
           }
         >
+          {/* Mobile Image */}
+          <Image
+            src="/mobile-chat-2.png"
+            alt="Enterprise ChatDoc - Internal Knowledge Management System"
+            height={1200}
+            width={800}
+            className="mx-auto rounded-2xl object-cover h-full md:hidden"
+            draggable={false}
+          />
+          {/* Desktop Image */}
           <Image
             src="/chatbot-2.png"
             alt="Enterprise ChatDoc - Internal Knowledge Management System"
             height={720}
             width={1400}
-            className="mx-auto rounded-2xl object-cover h-full object-left-top"
+            className="mx-auto rounded-2xl object-cover h-full object-left-top hidden md:block"
             draggable={false}
           />
         </ContainerScroll>

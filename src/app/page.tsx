@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState, lazy, Suspense } from "react";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
+import DesktopBanner from "@/components/ui/desktop-banner";
 
 // Lazy load heavy section components
 const About = lazy(() => import("@/components/sections/about"));
@@ -96,6 +97,17 @@ export default function Home() {
             className="absolute inset-0 z-[1] hidden bg-gradient-to-b from-blue-950/15 via-cyan-950/10 to-transparent md:block mix-blend-overlay"
             aria-hidden="true"
           />
+          {/* Enhanced Orange Gradient Overlay - Top-left and bottom-right */}
+          <div 
+            className="absolute inset-0 z-[1] hidden md:block mix-blend-overlay"
+            style={{
+              background: `
+                radial-gradient(ellipse 70% 60% at 0% 0%, rgba(255, 120, 0, 0.35) 0%, transparent 60%),
+                radial-gradient(ellipse 70% 60% at 100% 100%, rgba(255, 120, 0, 0.35) 0%, transparent 60%)
+              `
+            }}
+            aria-hidden="true"
+          />
         </div>
 
         {/* Mobile Menu Backdrop */}
@@ -109,7 +121,7 @@ export default function Home() {
 
         <header className="pointer-events-none absolute left-1/2 top-4 z-40 w-full max-w-5xl -translate-x-1/2 px-4 sm:top-6 sm:px-6">
           {/* Desktop Navigation */}
-          <nav className="pointer-events-auto hidden items-center justify-center gap-4 rounded-full border border-white/10 bg-gradient-to-r from-white/10 via-white/5 to-transparent px-6 py-3 backdrop-blur-md sm:flex md:gap-6 md:px-8">
+          <nav className="pointer-events-auto hidden items-center justify-center gap-5 rounded-full border border-white/10 bg-gradient-to-r from-white/10 via-white/5 to-transparent px-4 py-3 backdrop-blur-md sm:flex md:gap-10 md:px-5">
             {NAV_LINKS.map((label) => (
               <Link
                 key={label}
@@ -217,6 +229,9 @@ export default function Home() {
         <Projects />
         <Contact />
       </Suspense>
+
+      {/* Desktop recommendation banner for mobile users */}
+      <DesktopBanner />
     </>
   );
 }

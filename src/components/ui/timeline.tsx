@@ -27,7 +27,8 @@ export const Timeline = ({
   useEffect(() => {
     if (ref.current) {
       const rect = ref.current.getBoundingClientRect();
-      setHeight(rect.height);
+      // Reduce height to stop before the last card's bottom
+      setHeight(rect.height - 300);
     }
   }, [ref]);
 

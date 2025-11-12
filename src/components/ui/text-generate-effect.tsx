@@ -12,7 +12,7 @@ export const TextGenerateEffect = ({
   className?: string;
 }) => {
   const [scope, animate] = useAnimate();
-  const isInView = useInView(scope, { once: true });
+  const isInView = useInView(scope, { once: false, amount: 0.3 });
   const wordsArray = words.split(" ");
 
   useEffect(() => {
@@ -26,6 +26,18 @@ export const TextGenerateEffect = ({
         {
           duration: 0.5,
           delay: stagger(0.1),
+        },
+      );
+    } else {
+      // Reset animation when out of view
+      animate(
+        "span",
+        {
+          opacity: 0,
+          filter: "blur(10px)",
+        },
+        {
+          duration: 0,
         },
       );
     }

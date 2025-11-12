@@ -70,9 +70,9 @@ export const projects: Project[] = [
     nda: true,
   },
   {
-    title: "AI Cover Letter Assistant",
+    title: "AI Chrome Application Assistant",
     description:
-      "Smart extension that crafts personalized cover letters and instantly fills Greenhouse job applications using your saved resume details.",
+      "Smart extension that crafts personalized cover letters and instantly fills job applications using your saved resume details.",
     image: aiCoverLetterImage,
     skills: [
       "JavaScript",

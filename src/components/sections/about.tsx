@@ -10,7 +10,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative py-20 text-cloud sm:py-48 lg:py-64"
+      className="relative py-16 text-cloud sm:py-24 lg:py-32"
       style={{
         background: `
           radial-gradient(ellipse at 20% 30%, #f9731633 0%, transparent 50%),
@@ -21,7 +21,7 @@ export default function About() {
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-16 text-center">
+        <div className="mb-20 text-center sm:mb-24">
           <TextGenerateEffect
             words="About Me"
             className="text-4xl sm:text-5xl lg:text-6xl"
@@ -40,10 +40,7 @@ export default function About() {
             }
             description={
               <p className="text-center text-base leading-relaxed lg:text-lg">
-                I&apos;m a Software Engineer and graduate student at Virginia
-                Tech, passionate about designing scalable, reliable systems. Built
-                fraud-detection systems processing 100K+ transactions and AI
-                dashboards serving 50+ users.
+                Software Engineer and Computer Science graduate student at Virginia Tech (2026). I specialize in building scalable backend systems, RESTful APIs, and AI-powered software integrations that drive impact.
               </p>
             }
             header={
@@ -72,10 +69,7 @@ export default function About() {
             }
             description={
               <p className="text-center text-base leading-relaxed md:text-lg lg:text-lg">
-                I build full-stack and AI-driven applications that combine backend
-                efficiency with intuitive design — from fraud-detection systems and
-                intelligent dashboards to cross-platform apps powered by cloud
-                infrastructure.
+                I build complete software systems—from databases and REST APIs to frontend interfaces and cloud deployment—that solve real problems and run reliably in production.
               </p>
             }
             header={<CodeScroll />}

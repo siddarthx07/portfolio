@@ -81,11 +81,11 @@ export default function Projects() {
 
   return (
     <>
-      {/* Spacer wrapper for scroll distance */}
+      {/* Desktop: Horizontal Scroll Wrapper */}
       <div
         ref={wrapperRef}
         style={{ height: wrapperHeight }}
-        className="relative"
+        className="relative hidden md:block"
       >
         {/* Sticky container */}
         <div className="sticky top-0 h-screen overflow-hidden">
@@ -132,7 +132,7 @@ export default function Projects() {
                         className="inter-var"
                         containerClassName="items-start sm:items-center py-2 sm:py-4"
                       >
-                        <CardBody className="group/card relative h-auto w-[28rem] min-w-[28rem] sm:w-[30rem] sm:min-w-[30rem] lg:w-[34rem] lg:min-w-[34rem] xl:w-[38rem] xl:min-w-[38rem] 2xl:w-[40rem] 2xl:min-w-[40rem] rounded-3xl border border-white/10 px-5 py-5 sm:px-6 sm:py-6">
+                        <CardBody className="group/card relative h-auto w-[28rem] min-w-[28rem] sm:w-[30rem] sm:min-w-[30rem] lg:w-[34rem] lg:min-w-[34rem] xl:w-[38rem] xl:min-w-[38rem] 2xl:w-[40rem] 2xl:min-w-[40rem] rounded-3xl border border-white/10 px-6 py-5 sm:px-7 sm:py-6">
                           <CardItem
                             translateZ="50"
                             className="text-3xl font-semibold text-cloud lg:text-4xl"
@@ -142,11 +142,11 @@ export default function Projects() {
                           <CardItem
                             as="p"
                             translateZ="60"
-                            className="text-cloud/70 text-base max-w-2xl mt-3 leading-relaxed"
+                            className="text-cloud text-base max-w-2xl mt-3 leading-relaxed"
                           >
                             {project.description}
                           </CardItem>
-                          <CardItem translateZ="100" className="w-full mt-6 mb-2">
+                          <CardItem translateZ="100" className="w-full mt-6 mb-8">
                             <Image
                               src={project.image}
                               alt={project.title}
@@ -161,13 +161,13 @@ export default function Projects() {
                             {project.skills.map((skill, skillIndex) => (
                               <span
                                 key={skillIndex}
-                                className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs uppercase tracking-[0.2em] text-cloud/60"
+                                className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs uppercase tracking-[0.2em] text-cloud/85"
                               >
                                 {skill}
                               </span>
                             ))}
                           </div>
-                          <div className="flex flex-wrap items-center gap-3 mt-5">
+                          <div className="flex flex-wrap items-center gap-3 mt-6">
                             {!project.nda && project.links?.github && (
                               <CardItem
                                 translateZ={20}
@@ -210,6 +210,98 @@ export default function Projects() {
           </section>
         </div>
       </div>
+
+      {/* Mobile: Vertical Stack */}
+      <section
+        id="projects-mobile"
+        className="relative block overflow-hidden py-12 text-cloud md:hidden"
+        style={{
+          background: `
+            radial-gradient(ellipse at 20% 30%, #f9731633 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 70%, #f9731633 0%, transparent 50%),
+            linear-gradient(135deg, #05080f 0%, #0f172a 50%, #9ca3af22 100%)
+          `,
+        }}
+      >
+        <div className="mx-auto max-w-7xl px-6">
+          {/* Title */}
+          <div className="mb-8 text-center">
+            <TextGenerateEffect
+              words="Projects"
+              className="text-4xl sm:text-5xl"
+            />
+            <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-cloud/30 to-transparent" />
+          </div>
+
+          {/* Vertical Stack of Cards */}
+          <div className="space-y-8">
+            {projects.map((project, index) => {
+              const imageClass = "h-64 w-full object-contain rounded-xl";
+
+              return (
+                <div key={index} className="flex items-center justify-center">
+                  <div className="w-full max-w-md">
+                    <div className="group/card relative h-auto w-full rounded-3xl border border-white/10 bg-slate-900 p-5 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur">
+                      <h3 className="text-2xl font-semibold text-cloud">
+                        {project.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-relaxed text-cloud">
+                        {project.description}
+                      </p>
+                      <div className="mt-5 w-full">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          width={1000}
+                          height={600}
+                          className={imageClass}
+                          quality={100}
+                          unoptimized
+                        />
+                      </div>
+                      <div className="mt-5 flex flex-wrap gap-2">
+                        {project.skills.map((skill, skillIndex) => (
+                          <span
+                            key={skillIndex}
+                            className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs uppercase tracking-[0.2em] text-cloud/85"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-6 flex flex-wrap items-center gap-3">
+                        {!project.nda && project.links?.github && (
+                          <a
+                            href={project.links.github}
+                            target="_blank"
+                            className="rounded-xl px-4 py-2 text-sm font-normal text-cloud hover:text-white transition"
+                          >
+                            GitHub →
+                          </a>
+                        )}
+                        {!project.nda && project.links?.live && (
+                          <a
+                            href={project.links.live}
+                            target="_blank"
+                            className="rounded-xl bg-white/10 px-4 py-2 text-sm font-bold text-cloud hover:bg-white/20 transition"
+                          >
+                            Live Demo
+                          </a>
+                        )}
+                        {project.nda && (
+                          <p className="rounded-xl bg-white/5 px-4 py-2 text-sm font-normal italic text-cloud/50">
+                            Code &amp; demo unavailable due to NDA
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
     </>
   );
 }

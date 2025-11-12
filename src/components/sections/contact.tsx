@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, FormEvent } from "react";
-import { Github, Linkedin, Mail, Download, CheckCircle2, AlertCircle } from "lucide-react";
+import { Github, Linkedin, Mail, CheckCircle2, AlertCircle, FileText } from "lucide-react";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { contactInfo } from "@/data/contact";
 
@@ -96,9 +96,62 @@ export default function Contact() {
 
         <div className="mx-auto max-w-5xl">
           <div className="grid gap-12 lg:grid-cols-5 lg:gap-16 lg:items-start">
-            {/* Contact Form */}
-            <div className="lg:col-span-3">
-              <div className="rounded-3xl border border-white/10 bg-slate-900/50 p-8 sm:p-10 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur">
+            {/* Contact Info Sidebar - Shows first on mobile, second on desktop */}
+            <div className="flex flex-col gap-6 lg:col-span-2 lg:h-full lg:justify-between lg:order-2">
+              {/* Resume Link */}
+              <div className="rounded-3xl border border-white/10 bg-slate-900 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur flex-1 flex flex-col justify-center">
+                <h3 className="mb-6 text-xl font-semibold text-cloud">Resume</h3>
+                <a
+                  href={contactInfo.resume.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 rounded-xl border border-white/10 bg-slate-800/50 px-4 py-3 transition hover:border-white/30 hover:bg-slate-800"
+                >
+                  <FileText className="h-5 w-5 text-cloud/70" />
+                  <span className="text-base text-cloud/80">View Resume</span>
+                </a>
+              </div>
+
+              {/* Social Links */}
+              <div className="rounded-3xl border border-white/10 bg-slate-900 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur flex-1 flex flex-col justify-center">
+                <h3 className="mb-6 text-xl font-semibold text-cloud">Connect With Me</h3>
+                <div className="space-y-4">
+                  {contactInfo.social.map((social) => {
+                    const Icon = iconMap[social.icon];
+                    return (
+                      <a
+                        key={social.name}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-4 rounded-xl border border-white/10 bg-slate-800/50 px-4 py-3 transition hover:border-white/30 hover:bg-slate-800"
+                      >
+                        <Icon className="h-5 w-5 text-cloud/70" />
+                        <span className="text-base text-cloud/80">{social.name}</span>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Direct Email */}
+              <div className="rounded-3xl border border-white/10 bg-slate-900 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur flex-1 flex flex-col justify-center">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
+                  <Mail className="h-6 w-6 text-cloud" />
+                </div>
+                <h3 className="mb-2 text-xl font-semibold text-cloud">Email</h3>
+                <a
+                  href={`mailto:${contactInfo.email}`}
+                  className="break-all text-base text-cloud/90 hover:text-cloud transition underline underline-offset-4 decoration-cloud/40 hover:decoration-cloud"
+                >
+                  {contactInfo.email}
+                </a>
+              </div>
+            </div>
+
+            {/* Contact Form - Shows second on mobile, first on desktop */}
+            <div className="lg:col-span-3 lg:order-1">
+              <div className="rounded-3xl border border-white/10 bg-slate-900 p-8 sm:p-10 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur">
                 <h3 className="mb-8 text-2xl font-semibold text-cloud sm:text-3xl">
                   Send a Message
                 </h3>
@@ -208,62 +261,6 @@ export default function Contact() {
                     </div>
                   )}
                 </form>
-              </div>
-            </div>
-
-            {/* Contact Info Sidebar */}
-            <div className="flex flex-col gap-6 lg:col-span-2 lg:h-full lg:justify-between">
-              {/* Direct Email */}
-              <div className="rounded-3xl border border-white/10 bg-slate-900/50 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur flex-1 flex flex-col justify-center">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
-                  <Mail className="h-6 w-6 text-cloud" />
-                </div>
-                <h3 className="mb-2 text-xl font-semibold text-cloud">Email Me</h3>
-                <a
-                  href={`mailto:${contactInfo.email}`}
-                  className="break-all text-base text-cloud/90 hover:text-cloud transition underline underline-offset-4 decoration-cloud/40 hover:decoration-cloud"
-                >
-                  {contactInfo.email}
-                </a>
-              </div>
-
-              {/* Social Links */}
-              <div className="rounded-3xl border border-white/10 bg-slate-900/50 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur flex-1 flex flex-col justify-center">
-                <h3 className="mb-6 text-xl font-semibold text-cloud">Connect With Me</h3>
-                <div className="space-y-4">
-                  {contactInfo.social.map((social) => {
-                    const Icon = iconMap[social.icon];
-                    return (
-                      <a
-                        key={social.name}
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-4 rounded-xl border border-white/10 bg-slate-800/50 px-4 py-3 transition hover:border-white/30 hover:bg-slate-800"
-                      >
-                        <Icon className="h-5 w-5 text-cloud/70" />
-                        <span className="text-base text-cloud/80">{social.name}</span>
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Resume Download */}
-              <div className="rounded-3xl border border-white/10 bg-slate-900/50 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur flex-1 flex flex-col justify-center">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
-                  <Download className="h-6 w-6 text-cloud" />
-                </div>
-                <h3 className="mb-2 text-xl font-semibold text-cloud">Resume</h3>
-                <p className="mb-4 text-sm text-cloud/70">Download my latest resume</p>
-                <a
-                  href={contactInfo.resume.url}
-                  download={contactInfo.resume.filename}
-                  className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold text-cloud transition hover:bg-white/20"
-                >
-                  <Download className="h-4 w-4" />
-                  Download CV
-                </a>
               </div>
             </div>
           </div>

@@ -23,7 +23,7 @@ export const CodeScroll = () => {
           y: ["0%", "-50%"],
         }}
         transition={{
-          duration: 12,
+          duration: 20,
           repeat: Infinity,
           ease: "linear",
         }}

@@ -18,11 +18,8 @@ const experience: ExperienceEntry[] = [
     yearLabel: "JAN 2025 – PRESENT",
     heading: "Research Assistant · Software Engineering",
     highlight:
-      "Orchestrated a precision agriculture platform that reduces crop stress detection errors by 85% through AI-powered disease identification and thermal imaging.",
-    bullets: [
-      "Real-time satellite monitoring of 10m-resolution NDVI data across unlimited field boundaries for precision irrigation management",
-      "43+ disease classes detected across 8 crop types with real-time GPS mapping and treatment recommendations",
-    ],
+      "Built an AI-driven precision agriculture platform that improved crop disease detection accuracy by 85%. Integrated thermal imaging, NDVI satellite data, and real-time GPS mapping for precision irrigation and targeted disease treatment.",
+    bullets: [],
     stack: ["Swift", "Kotlin", "CoreML", "REST", "AWS"],
   },
   {
@@ -30,11 +27,8 @@ const experience: ExperienceEntry[] = [
     yearLabel: "MAY 2025 – JUL 2025",
     heading: "Software Engineer Intern",
     highlight:
-      "Delivered a compliance-ready enterprise chatbot that cut PDF search time for employees by 60%.",
-    bullets: [
-      "Integrated LangChain + FAISS pipelines with RBAC and audit logging for zero data policy violations.",
-      "Scaled Firebase ingestion to 1,000+ documents while sustaining low-latency responses for concurrent teams.",
-    ],
+      "Delivered an enterprise chatbot using LangChain + FAISS to help employees find compliance documents 60% faster.",
+    bullets: [],
     stack: ["Python", "LangChain", "FAISS", "Firebase", "RBAC"],
   },
   {
@@ -42,11 +36,8 @@ const experience: ExperienceEntry[] = [
     yearLabel: "APR 2024 – JUL 2024",
     heading: "Software Engineering Intern",
     highlight:
-      "Modernized research workflows with faster batch processing and reusable UI patterns.",
-    bullets: [
-      "Optimized Java workflows using multithreading, reducing batch data processing time by 25%.",
-      "Built a reusable React component library that improved code consistency and reduced reporting defects by 50%.",
-    ],
+      "Optimized Java batch processing (–25% time) and designed a reusable React library that cut reporting bugs by half.",
+    bullets: [],
     stack: ["Java", "React", "Spring", "PostgreSQL"],
   },
 ];
@@ -79,15 +70,17 @@ export default function Experience() {
             {item.heading}
           </h3>
         </div>
-        <p className="mt-6 text-xl font-semibold text-cloud sm:text-2xl leading-relaxed">{item.highlight}</p>
-        <ul className="mt-8 space-y-4 text-base sm:text-lg text-cloud/70">
-          {item.bullets.map((bullet) => (
-            <li key={bullet} className="flex gap-3">
-              <span className="mt-2 h-2 w-2 rounded-full bg-cloud/60 flex-shrink-0" />
-              <span className="leading-relaxed">{bullet}</span>
-            </li>
-          ))}
-        </ul>
+        <p className="mt-6 text-xl text-cloud sm:text-2xl leading-relaxed">{item.highlight}</p>
+        {item.bullets.length > 0 && (
+          <ul className="mt-8 space-y-4 text-base sm:text-lg text-cloud/70">
+            {item.bullets.map((bullet) => (
+              <li key={bullet} className="flex gap-3">
+                <span className="mt-2 h-2 w-2 rounded-full bg-cloud/60 flex-shrink-0" />
+                <span className="leading-relaxed">{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        )}
         <TechPills items={item.stack} />
       </div>
     ),

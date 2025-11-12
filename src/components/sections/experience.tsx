@@ -29,7 +29,7 @@ const experience: ExperienceEntry[] = [
     highlight:
       "Delivered an enterprise chatbot using LangChain + FAISS to help employees find compliance documents 60% faster.",
     bullets: [],
-    stack: ["Python", "LangChain", "FAISS", "Firebase", "RBAC"],
+    stack: ["Python", "LangChain", "FAISS", "Firebase", "RAG"],
   },
   {
     period: "Centre for Economic and Social Studies",

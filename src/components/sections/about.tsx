@@ -69,7 +69,7 @@ export default function About() {
               <div className="space-y-4 text-center text-base leading-relaxed md:text-lg lg:text-lg">
                 <p>
                   I build complete software systems—from databases and REST APIs to frontend interfaces and cloud deployment, that solve real problems and run reliably in production.
-                </p>
+              </p>
                 <p className="text-sm md:text-base">
                   <a 
                     href="https://www.hackerrank.com/profile/siddarthbandi07" 

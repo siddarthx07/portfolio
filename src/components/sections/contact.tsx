@@ -31,10 +31,10 @@ export default function Contact() {
       const emailjs = (await import("@emailjs/browser")).default;
       
       await emailjs.sendForm(
-        "service_dgm98ae",
-        "template_46up75u",
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         formRef.current!,
-        "2o4_lM5yWYK_VCrzK"
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
       setSubmitStatus("success");

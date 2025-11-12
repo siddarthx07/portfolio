@@ -4,202 +4,191 @@ import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { projects } from "@/data/projects";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Projects() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const section = sectionRef.current;
+    const wrapper = wrapperRef.current;
     const container = containerRef.current;
-    const title = titleRef.current;
-    const wrapper = container?.parentElement as HTMLElement | null;
 
-    if (!section || !container || !title) return;
+    if (!wrapper || !container) return;
 
-    // Lazy load GSAP only when component is mounted
-    let scrollTween: { scrollTrigger?: { kill: () => void }; kill: () => void } | null = null;
-
-    const initGSAP = async () => {
-      try {
-        const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
-          import("gsap"),
-          import("gsap/ScrollTrigger"),
-        ]);
-
-        gsap.registerPlugin(ScrollTrigger);
-
-        const getViewportWidth = () =>
-          wrapper?.clientWidth ?? window.innerWidth;
-        const getScrollDistance = () =>
-          Math.max(0, container.scrollWidth - getViewportWidth());
-        const getTitleOffset = () => {
-          const marginBottom =
-            parseFloat(window.getComputedStyle(title).marginBottom) || 0;
-          const titleRect = title.getBoundingClientRect();
-          const sectionRect = section.getBoundingClientRect();
-          return (
-            titleRect.height + (titleRect.top - sectionRect.top) + marginBottom
-          );
-        };
-
-        const getStartPosition = () => {
-          const baseOffset = getTitleOffset();
-          const containerHeight = container.getBoundingClientRect().height;
-          const viewportHeight = window.innerHeight;
-          const centerOffset = Math.max(
-            0,
-            (viewportHeight - containerHeight) / 2
-          );
-          const offset = baseOffset - centerOffset;
-          const absoluteOffset = Math.abs(offset).toFixed(2);
-
-          if (offset >= 0) {
-            return `top+=${absoluteOffset} top`;
-          }
-
-          return `top-=${absoluteOffset} top`;
-        };
-
-        scrollTween = gsap.to(container, {
-          x: () => -getScrollDistance(),
-          ease: "none",
-          scrollTrigger: {
-            trigger: section,
-            start: getStartPosition,
-            pin: true,
-            scrub: 1,
-            end: () => `+=${getScrollDistance()}`,
-            invalidateOnRefresh: true,
-          },
-        });
-      } catch (error) {
-        console.error("Failed to load GSAP:", error);
+    const handleScroll = () => {
+      const rect = wrapper.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Only calculate when section is in view
+      if (rect.bottom < 0 || rect.top > windowHeight) {
+        return;
       }
+      
+      // Calculate scroll progress within the wrapper
+      // When wrapper top reaches viewport top (0), progress = 0
+      // When wrapper bottom reaches viewport top, progress = 1
+      const scrollStart = 0;
+      const scrollEnd = rect.height - windowHeight;
+      const currentScroll = -rect.top;
+      
+      const progress = Math.max(0, Math.min(1, (currentScroll - scrollStart) / scrollEnd));
+      setScrollProgress(progress);
+      
+      // Calculate horizontal translation
+      const maxScroll = container.scrollWidth - window.innerWidth;
+      const translateX = -progress * maxScroll;
+      
+      container.style.transform = `translateX(${translateX}px)`;
     };
 
-    initGSAP();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+    
+    // Initial call
+    requestAnimationFrame(handleScroll);
 
     return () => {
-      if (scrollTween) {
-        scrollTween.scrollTrigger?.kill();
-        scrollTween.kill();
-      }
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, []);
 
+  // Calculate wrapper height for scroll distance
+  const wrapperHeight = "300vh"; // 3x viewport height for smooth scrolling
+
   return (
-    <section
-      ref={sectionRef}
-      id="projects"
-      className="relative overflow-x-hidden overflow-y-visible py-12 text-cloud sm:py-16 lg:py-20"
-      style={{
-        background: `
-          radial-gradient(ellipse at 20% 30%, #f9731633 0%, transparent 50%),
-          radial-gradient(ellipse at 80% 70%, #f9731633 0%, transparent 50%),
-          linear-gradient(135deg, #05080f 0%, #0f172a 50%, #9ca3af22 100%)
-        `,
-      }}
-    >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mb-10 text-center sm:mb-14" ref={titleRef}>
-          <TextGenerateEffect
-            words="Projects"
-            className="text-4xl sm:text-5xl lg:text-6xl"
-          />
-          <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-cloud/30 to-transparent" />
-        </div>
-
-        <div
-          ref={containerRef}
-          className="flex gap-12 sm:gap-16 lg:gap-20 xl:gap-24 px-[6vw] sm:px-[8vw] lg:px-[9vw]"
-        >
-          {projects.map((project, index) => {
-            const imageClass = "h-80 w-full object-contain rounded-xl group-hover/card:shadow-xl";
-
-            return (
-              <div key={index} className="flex-shrink-0 flex items-center justify-center">
-                <CardContainer
-                  className="inter-var"
-                  containerClassName="items-start sm:items-center py-4 sm:py-6 lg:py-10"
-                >
-                  <CardBody className="group/card relative h-auto w-[28rem] min-w-[28rem] sm:w-[30rem] sm:min-w-[30rem] lg:w-[34rem] lg:min-w-[34rem] xl:w-[38rem] xl:min-w-[38rem] 2xl:w-[40rem] 2xl:min-w-[40rem] rounded-3xl border border-white/10 px-6 py-7 sm:px-8 sm:py-8">
-                    <CardItem
-                      translateZ="50"
-                      className="text-3xl font-semibold text-cloud lg:text-4xl"
-                    >
-                      {project.title}
-                    </CardItem>
-                    <CardItem
-                      as="p"
-                      translateZ="60"
-                      className="text-cloud/70 text-base max-w-2xl mt-4 leading-relaxed"
-                    >
-                      {project.description}
-                    </CardItem>
-                    <CardItem translateZ="100" className="w-full mt-6">
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        width={1000}
-                        height={600}
-                        className={imageClass}
-                        quality={100}
-                      />
-                    </CardItem>
-                    <div className="flex flex-wrap gap-2.5 mt-8">
-                      {project.skills.map((skill, skillIndex) => (
-                        <span
-                          key={skillIndex}
-                          className="rounded-full border border-white/10 bg-white/[0.06] px-4 py-1.5 text-sm uppercase tracking-[0.25em] text-cloud/60"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex flex-wrap items-center gap-4 mt-8">
-                      {project.links?.github && (
-                        <CardItem
-                          translateZ={20}
-                          as="a"
-                          href={project.links.github}
-                          target="_blank"
-                          className="px-6 py-3 rounded-xl text-sm font-normal text-cloud hover:text-white transition"
-                        >
-                          GitHub →
-                        </CardItem>
-                      )}
-                      {index !== 2 && index !== 3 && (
-                        project.links?.live ? (
-                          <CardItem
-                            translateZ={20}
-                            as="a"
-                            href={project.links.live}
-                            target="_blank"
-                            className="px-6 py-3 rounded-xl bg-white/10 text-cloud text-sm font-bold hover:bg-white/20 transition"
-                          >
-                            Live Demo
-                          </CardItem>
-                        ) : (
-                          <CardItem
-                            translateZ={20}
-                            as="button"
-                            className="px-6 py-3 rounded-xl bg-white/10 text-cloud text-sm font-bold hover:bg-white/20 transition cursor-not-allowed"
-                          >
-                            Live Demo
-                          </CardItem>
-                        )
-                      )}
-                    </div>
-                  </CardBody>
-                </CardContainer>
+    <>
+      {/* Spacer wrapper for scroll distance */}
+      <div
+        ref={wrapperRef}
+        style={{ height: wrapperHeight }}
+        className="relative"
+      >
+        {/* Sticky container */}
+        <div className="sticky top-0 h-screen overflow-hidden">
+          <section
+            id="projects"
+            className="relative h-full text-cloud"
+            style={{
+              background: `
+                radial-gradient(ellipse at 20% 30%, #f9731633 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, #f9731633 0%, transparent 50%),
+                linear-gradient(135deg, #05080f 0%, #0f172a 50%, #9ca3af22 100%)
+              `,
+            }}
+          >
+            {/* Title Section */}
+            <div className="absolute left-0 right-0 top-0 z-10 pt-12 sm:pt-16 lg:pt-20">
+              <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                <div className="text-center">
+                  <TextGenerateEffect
+                    words="Projects"
+                    className="text-4xl sm:text-5xl lg:text-6xl"
+                  />
+                  <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-cloud/30 to-transparent" />
+                </div>
               </div>
-            );
-          })}
+            </div>
+
+            {/* Horizontal Scrolling Container */}
+            <div className="absolute inset-0 flex items-center overflow-hidden pt-32 sm:pt-40">
+              <div
+                ref={containerRef}
+                className="flex gap-8 px-[10vw] lg:gap-12 xl:gap-16"
+                style={{
+                  transform: "translateX(0px)",
+                  willChange: "transform",
+                }}
+              >
+                {projects.map((project, index) => {
+                  const imageClass = "h-80 w-full object-contain rounded-xl group-hover/card:shadow-xl";
+
+                  return (
+                    <div key={index} className="flex-shrink-0 flex items-center justify-center">
+                      <CardContainer
+                        className="inter-var"
+                        containerClassName="items-start sm:items-center py-4 sm:py-6 lg:py-10"
+                      >
+                        <CardBody className="group/card relative h-auto w-[28rem] min-w-[28rem] sm:w-[30rem] sm:min-w-[30rem] lg:w-[34rem] lg:min-w-[34rem] xl:w-[38rem] xl:min-w-[38rem] 2xl:w-[40rem] 2xl:min-w-[40rem] rounded-3xl border border-white/10 px-6 py-7 sm:px-8 sm:py-8">
+                          <CardItem
+                            translateZ="50"
+                            className="text-3xl font-semibold text-cloud lg:text-4xl"
+                          >
+                            {project.title}
+                          </CardItem>
+                          <CardItem
+                            as="p"
+                            translateZ="60"
+                            className="text-cloud/70 text-base max-w-2xl mt-4 leading-relaxed"
+                          >
+                            {project.description}
+                          </CardItem>
+                          <CardItem translateZ="100" className="w-full mt-6">
+                            <Image
+                              src={project.image}
+                              alt={project.title}
+                              width={1000}
+                              height={600}
+                              className={imageClass}
+                              quality={100}
+                              unoptimized
+                            />
+                          </CardItem>
+                          <div className="flex flex-wrap gap-2.5 mt-8">
+                            {project.skills.map((skill, skillIndex) => (
+                              <span
+                                key={skillIndex}
+                                className="rounded-full border border-white/10 bg-white/[0.06] px-4 py-1.5 text-sm uppercase tracking-[0.25em] text-cloud/60"
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                          <div className="flex flex-wrap items-center gap-4 mt-8">
+                            {!project.nda && project.links?.github && (
+                              <CardItem
+                                translateZ={20}
+                                as="a"
+                                href={project.links.github}
+                                target="_blank"
+                                className="px-6 py-3 rounded-xl text-sm font-normal text-cloud hover:text-white transition"
+                              >
+                                GitHub →
+                              </CardItem>
+                            )}
+                            {!project.nda && project.links?.live && (
+                              <CardItem
+                                translateZ={20}
+                                as="a"
+                                href={project.links.live}
+                                target="_blank"
+                                className="px-6 py-3 rounded-xl bg-white/10 text-cloud text-sm font-bold hover:bg-white/20 transition"
+                              >
+                                Live Demo
+                              </CardItem>
+                            )}
+                            {project.nda && (
+                              <CardItem
+                                translateZ={20}
+                                as="p"
+                                className="px-6 py-3 rounded-xl bg-white/5 text-cloud/50 text-sm font-normal italic"
+                              >
+                                Code &amp; demo unavailable due to NDA
+                              </CardItem>
+                            )}
+                          </div>
+                        </CardBody>
+                      </CardContainer>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
         </div>
       </div>
-    </section>
+    </>
   );
 }

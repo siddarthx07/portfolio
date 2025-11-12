@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, lazy, Suspense } from "react";
+import Image from "next/image";
+import { useEffect, useState, lazy, Suspense } from "react";
+import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 
 // Lazy load heavy section components
 const About = lazy(() => import("@/components/sections/about"));
@@ -9,121 +11,10 @@ const Experience = lazy(() => import("@/components/sections/experience"));
 const Projects = lazy(() => import("@/components/sections/projects"));
 const Contact = lazy(() => import("@/components/sections/contact"));
 
-type VantaEffectInstance = {
-  destroy: () => void;
-  pause?: () => void;
-  resume?: () => void;
-};
-
 const NAV_LINKS = ["About", "Experience", "Projects", "Contact"];
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const vantaContainerRef = useRef<HTMLDivElement | null>(null);
-  const vantaEffectRef = useRef<VantaEffectInstance | null>(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    );
-
-    if (prefersReducedMotion.matches) {
-      return;
-    }
-
-    let mounted = true;
-    let observer: IntersectionObserver | null = null;
-
-    const initVanta = async () => {
-      if (!vantaContainerRef.current || vantaEffectRef.current) {
-        return;
-      }
-
-      try {
-        const [{ default: VANTA }, THREE] = await Promise.all([
-          import("vanta/dist/vanta.clouds.min"),
-          import("three"),
-        ]);
-
-        if (!mounted || !vantaContainerRef.current) {
-          return;
-        }
-
-        // Detect mobile/tablet for performance optimizations
-        const isMobile = window.innerWidth < 1024;
-
-        const effect = VANTA({
-          el: vantaContainerRef.current,
-          THREE,
-          mouseControls: false, // Disable on mobile
-          touchControls: false,
-          gyroControls: false,
-          minHeight: 200.0,
-          minWidth: 200.0,
-          scale: isMobile ? 0.7 : 1.0, // Lower scale on mobile
-          scaleMobile: 0.7,
-          texturePath: "https://cdn.jsdelivr.net/npm/vanta/dist/",
-          skyColor: 0x05080f,
-          cloudColor: 0x9ca3af,
-          cloudShadowColor: 0x0f172a,
-          sunColor: 0xfacc15,
-          sunGlareColor: 0xf97316,
-          speed: isMobile ? 0.4 : 0.6, // Slower on mobile
-          // Performance optimizations
-          maxDistance: isMobile ? 12.0 : 20.0, // Reduce render distance
-        });
-
-        vantaEffectRef.current = effect as VantaEffectInstance;
-
-        // Pause animation when scrolled away (HUGE performance win)
-        observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (vantaEffectRef.current) {
-                if (entry.isIntersecting) {
-                  vantaEffectRef.current.resume?.();
-                } else {
-                  vantaEffectRef.current.pause?.();
-                }
-              }
-            });
-          },
-          { threshold: 0.1 }
-        );
-
-        if (vantaContainerRef.current) {
-          observer.observe(vantaContainerRef.current);
-        }
-      } catch (error) {
-        console.error("Failed to initialize Vanta clouds", error);
-      }
-    };
-
-    // Pause when tab is hidden
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        vantaEffectRef.current?.pause?.();
-      } else {
-        vantaEffectRef.current?.resume?.();
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-
-    initVanta();
-
-    return () => {
-      mounted = false;
-      observer?.disconnect();
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      vantaEffectRef.current?.destroy();
-      vantaEffectRef.current = null;
-    };
-  }, []);
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -137,19 +28,85 @@ export default function Home() {
     };
   }, [mobileMenuOpen]);
 
+  const roleWords = [
+    {
+      text: "I'm",
+      className: "text-cloud",
+    },
+    {
+      text: "a",
+      className: "text-cloud",
+    },
+    {
+      text: "software",
+      className: "text-cloud",
+    },
+    {
+      text: "engineer.",
+      className: "text-cloud",
+    },
+  ];
+
   return (
     <>
       <main
         id="hero"
         className="relative flex min-h-screen flex-col bg-night text-cloud"
       >
-        <div
-          ref={vantaContainerRef}
-          className="absolute inset-0 z-0 h-full w-full"
-          aria-hidden
-        />
+        {/* Static Background Image */}
+        <div className="absolute inset-0 z-0 h-full w-full">
+          {/* Mobile Background */}
+          <Image
+            src="/moblie-cloud2.png"
+            alt=""
+            fill
+            priority
+            quality={100}
+            unoptimized
+            className="object-cover md:hidden"
+            style={{ imageRendering: '-webkit-optimize-contrast' }}
+            aria-hidden="true"
+          />
+          {/* Mobile Background Overlay - Darkens bright areas and improves text readability */}
+          <div 
+            className="absolute inset-0 z-[1] bg-gradient-to-b from-black/50 via-black/30 to-transparent md:hidden"
+            aria-hidden="true"
+          />
+          
+          {/* Desktop Background */}
+          <Image
+            src="/main-cloud7.png"
+            alt=""
+            fill
+            priority
+            quality={100}
+            unoptimized
+            className="hidden object-cover md:block"
+            style={{ imageRendering: '-webkit-optimize-contrast' }}
+            aria-hidden="true"
+          />
+          {/* Desktop Background Overlay - Subtle darkening */}
+          <div 
+            className="absolute inset-0 z-[1] hidden bg-gradient-to-b from-black/20 via-black/10 to-transparent md:block"
+            aria-hidden="true"
+          />
+          {/* Desktop Color Correction Overlay - Different blend method */}
+          <div 
+            className="absolute inset-0 z-[1] hidden bg-gradient-to-b from-blue-950/15 via-cyan-950/10 to-transparent md:block mix-blend-overlay"
+            aria-hidden="true"
+          />
+        </div>
 
-        <header className="pointer-events-none absolute left-1/2 top-4 z-20 w-full max-w-5xl -translate-x-1/2 px-4 sm:top-6 sm:px-6">
+        {/* Mobile Menu Backdrop */}
+        {mobileMenuOpen && (
+          <div
+            className="fixed inset-0 z-30 sm:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+
+        <header className="pointer-events-none absolute left-1/2 top-4 z-40 w-full max-w-5xl -translate-x-1/2 px-4 sm:top-6 sm:px-6">
           {/* Desktop Navigation */}
           <nav className="pointer-events-auto hidden items-center justify-center gap-4 rounded-full border border-white/10 bg-gradient-to-r from-white/10 via-white/5 to-transparent px-6 py-3 backdrop-blur-md sm:flex md:gap-6 md:px-8">
             {NAV_LINKS.map((label) => (
@@ -216,23 +173,27 @@ export default function Home() {
           <h1 className="mt-6 text-6xl font-extrabold tracking-tight text-cloud sm:text-7xl lg:text-8xl">
             Siddarth Bandi
           </h1>
-          <p className="mt-4 text-2xl font-semibold text-cloud sm:text-3xl">
-            I&apos;m a software engineer.
-          </p>
+          <div className="mt-4 text-2xl font-semibold text-cloud sm:text-3xl">
+            <TypewriterEffectSmooth
+              words={roleWords}
+              className=""
+              cursorClassName="bg-cloud h-6 sm:h-8"
+            />
+          </div>
         </div>
 
         <div className="pointer-events-none absolute inset-x-0 bottom-12 flex justify-center sm:bottom-16">
           <div className="pointer-events-auto flex flex-col items-center gap-2 text-xs uppercase tracking-[0.3em] text-cloud/70 sm:gap-3 sm:tracking-[0.4em]">
-            <span className="hidden text-cloud/60 sm:inline">Scroll Down</span>
             <div className="flex h-12 w-7 items-start justify-center rounded-full border border-white/20 p-2 sm:h-14 sm:w-8">
               <span className="h-2 w-1.5 animate-mouseScroll rounded-full bg-cloud/80" />
             </div>
           </div>
         </div>
 
+        {/* Additional subtle vignette effect */}
         <div
-          className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-night/40 via-transparent to-transparent"
-          aria-hidden
+          className="pointer-events-none absolute inset-0 z-[2] bg-gradient-radial from-transparent via-transparent to-black/20"
+          aria-hidden="true"
         />
 
         <div className="sr-only">

@@ -14,6 +14,7 @@ export type Project = {
     github?: string;
     live?: string;
   };
+  nda?: boolean;
 };
 
 export const projects: Project[] = [
@@ -66,6 +67,7 @@ export const projects: Project[] = [
       "JWT Auth",
       "AWS",
     ],
+    nda: true,
   },
   {
     title: "AI Cover Letter Assistant",

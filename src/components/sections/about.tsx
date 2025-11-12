@@ -55,6 +55,8 @@ export default function About() {
                   sizes="(min-width: 1024px) 20rem, (min-width: 640px) 18rem, 16rem"
                   className="object-cover object-center"
                   priority
+                  quality={100}
+                  unoptimized
                 />
               </div>
             }

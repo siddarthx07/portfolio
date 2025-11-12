@@ -37,7 +37,7 @@ export function LightboxImage({
           )}
           {...imageProps}
         />
-        <span className="pointer-events-none absolute inset-x-0 bottom-3 text-center text-xs uppercase tracking-[0.3em] text-cloud/60 opacity-0 transition group-hover:opacity-100">
+        <span className="pointer-events-none absolute inset-x-0 bottom-3 text-center text-xs uppercase tracking-[0.3em] text-white opacity-0 transition group-hover:opacity-100">
           Tap to expand
         </span>
       </button>

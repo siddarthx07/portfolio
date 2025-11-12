@@ -3,19 +3,17 @@
 import Image from "next/image";
 
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
-import { CodeScroll } from "@/components/ui/code-scroll";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 export default function About() {
   return (
     <section
       id="about"
-      className="relative py-16 text-cloud sm:py-24 lg:py-32"
+      className="relative py-16 text-white sm:py-24 lg:py-32"
       style={{
         background: `
-          radial-gradient(ellipse at 20% 30%, #f9731633 0%, transparent 50%),
-          radial-gradient(ellipse at 80% 70%, #f9731633 0%, transparent 50%),
-          linear-gradient(135deg, #05080f 0%, #0f172a 50%, #9ca3af22 100%)
+          radial-gradient(ellipse 1000px 800px at 70% 20%, rgba(249, 115, 22, 0.20) 0%, transparent 50%),
+          #000000
         `,
       }}
     >
@@ -26,7 +24,7 @@ export default function About() {
             words="About Me"
             className="text-4xl sm:text-5xl lg:text-6xl"
           />
-          <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-cloud/30 to-transparent" />
+          <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-[#f97316] to-transparent" />
         </div>
 
         {/* Bento Grid */}
@@ -68,11 +66,65 @@ export default function About() {
               </div>
             }
             description={
-              <p className="text-center text-base leading-relaxed md:text-lg lg:text-lg">
-                I build complete software systems—from databases and REST APIs to frontend interfaces and cloud deployment—that solve real problems and run reliably in production.
-              </p>
+              <div className="space-y-4 text-center text-base leading-relaxed md:text-lg lg:text-lg">
+                <p>
+                  I build complete software systems—from databases and REST APIs to frontend interfaces and cloud deployment, that solve real problems and run reliably in production.
+                </p>
+                <p className="text-sm md:text-base">
+                  <a 
+                    href="https://www.hackerrank.com/profile/siddarthbandi07" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-white hover:text-[#f97316] transition underline underline-offset-4"
+                  >
+                    HackerRank
+                  </a>
+                  {" "}• C++ 5★ • Problem Solving 6★ (Top 1% globally)
+                </p>
+              </div>
             }
-            header={<CodeScroll />}
+            header={
+              <div className="relative h-64 w-full overflow-hidden sm:h-72 lg:h-80">
+                <div className="flex flex-col gap-2">
+                  {[
+                    { lang: "ts", code: "app.post('/api/schedule', authenticate, async (req, res) => {" },
+                    { lang: "py", code: "result = coreml_model.predict(image) # <200ms on 43+ classes" },
+                    { lang: "tsx", code: "const Dashboard = () => <FraudAlerts metrics={realTimeData} />" },
+                    { lang: "py", code: "retriever = FAISS.from_documents(docs, embeddings)" },
+                    { lang: "java", code: "@PostMapping(\"/fraud/detect\") public ResponseEntity<Result>" },
+                    { lang: "ts", code: "await Farm.findOne({ farmerId }).populate('weatherTasks')" },
+                    { lang: "java", code: "@Service public class AuthService implements UserDetailsService {" },
+                    { lang: "ts", code: "const response = await axios.post('/api/v1/detect', formData)" },
+                    { lang: "py", code: "chain = RetrievalQA.from_chain_type(llm, retriever=vectorstore)" },
+                    { lang: "tsx", code: "<AnimatePresence>{isOpen && <Modal onClose={handleClose} />}</AnimatePresence>" },
+                    { lang: "java", code: "repository.save(new Transaction(userId, amount, timestamp))" },
+                    { lang: "ts", code: "export const getServerSideProps: GetServerSideProps = async (ctx) => {" },
+                  ].map((snippet, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-2 rounded-md bg-slate-950/50 px-3 py-1.5 font-mono text-xs"
+                    >
+                      <span
+                        className={`text-[10px] font-bold uppercase ${
+                          snippet.lang === "py"
+                            ? "text-blue-400"
+                            : snippet.lang === "ts"
+                              ? "text-green-400"
+                              : "text-purple-400"
+                        }`}
+                      >
+                        {snippet.lang}
+                      </span>
+                      <code className="text-white">{snippet.code}</code>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Gradient fade at top and bottom */}
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-900/50 to-transparent" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-900/50 to-transparent" />
+              </div>
+            }
             className="md:col-span-2 lg:col-span-3"
           />
 

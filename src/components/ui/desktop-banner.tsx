@@ -94,7 +94,7 @@ export default function DesktopBanner() {
               {/* Close button */}
               <button
                 onClick={handleDismiss}
-                className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-cloud/70 transition hover:bg-white/20 hover:text-cloud"
+                className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
                 aria-label="Dismiss"
               >
                 <X className="h-4 w-4" />

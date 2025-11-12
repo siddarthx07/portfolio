@@ -8,12 +8,11 @@ export default function FeaturedProject() {
   return (
     <section
       id="projects"
-      className="text-cloud"
+      className="text-white"
       style={{
         background: `
-          radial-gradient(ellipse at 20% 30%, #f9731633 0%, transparent 50%),
-          radial-gradient(ellipse at 80% 70%, #f9731633 0%, transparent 50%),
-          linear-gradient(135deg, #05080f 0%, #0f172a 50%, #9ca3af22 100%)
+          radial-gradient(ellipse 1000px 800px at 70% 25%, rgba(249, 115, 22, 0.18) 0%, transparent 50%),
+          #000000
         `,
       }}
     >

@@ -4,6 +4,7 @@ import { useState, useRef, FormEvent } from "react";
 import { Github, Linkedin, Mail, CheckCircle2, AlertCircle, FileText } from "lucide-react";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { contactInfo } from "@/data/contact";
+import type { ContactFormData, SubmitStatus } from "@/types/contact";
 
 const iconMap = {
   github: Github,
@@ -13,8 +14,8 @@ const iconMap = {
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
-  const [formData, setFormData] = useState({
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
+  const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
     subject: "",
@@ -38,7 +39,13 @@ export default function Contact() {
       );
 
       setSubmitStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      // Reset form data
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
 
       // Reset success message after 5 seconds
       setTimeout(() => setSubmitStatus("idle"), 5000);
@@ -56,18 +63,18 @@ export default function Contact() {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name as keyof ContactFormData]: value }));
   };
 
   return (
     <section
       id="contact"
-      className="relative py-24 text-cloud sm:py-32 lg:py-40"
+      className="relative py-24 text-white sm:py-32 lg:py-40"
       style={{
         background: `
-          radial-gradient(ellipse at 20% 30%, #f9731633 0%, transparent 50%),
-          radial-gradient(ellipse at 80% 70%, #f9731633 0%, transparent 50%),
-          linear-gradient(135deg, #05080f 0%, #0f172a 50%, #9ca3af22 100%)
+          radial-gradient(ellipse 1000px 800px at 75% 35%, rgba(249, 115, 22, 0.18) 0%, transparent 50%),
+          #000000
         `,
       }}
     >
@@ -78,7 +85,7 @@ export default function Contact() {
             words="Let's Connect"
             className="text-4xl sm:text-5xl lg:text-6xl"
           />
-          <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-cloud/30 to-transparent" />
+          <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-[#f97316] to-transparent" />
         </div>
 
         {/* Availability Badge */}
@@ -99,22 +106,40 @@ export default function Contact() {
             {/* Contact Info Sidebar - Shows first on mobile, second on desktop */}
             <div className="flex flex-col gap-6 lg:col-span-2 lg:h-full lg:justify-between lg:order-2">
               {/* Resume Link */}
-              <div className="rounded-3xl border border-white/10 bg-slate-900 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur flex-1 flex flex-col justify-center">
-                <h3 className="mb-6 text-xl font-semibold text-cloud">Resume</h3>
+              <div 
+                className="rounded-3xl backdrop-blur-xl p-8 flex-1 flex flex-col justify-center"
+                style={{
+                  background: 'rgba(30, 30, 30, 0.7)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  boxShadow: '0 8px 32px 0 rgba(249, 115, 22, 0.1)',
+                }}
+              >
+                <h3 className="mb-6 text-xl font-semibold text-white">Resume</h3>
                 <a
                   href={contactInfo.resume.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 rounded-xl border border-white/10 bg-slate-800/50 px-4 py-3 transition hover:border-white/30 hover:bg-slate-800"
+                  className="flex items-center gap-4 rounded-xl backdrop-blur-md px-4 py-3 transition hover:bg-white/10"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                  }}
                 >
-                  <FileText className="h-5 w-5 text-cloud/70" />
-                  <span className="text-base text-cloud/80">View Resume</span>
+                  <FileText className="h-5 w-5 text-[#f97316]" />
+                  <span className="text-base text-white">View Resume</span>
                 </a>
               </div>
 
               {/* Social Links */}
-              <div className="rounded-3xl border border-white/10 bg-slate-900 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur flex-1 flex flex-col justify-center">
-                <h3 className="mb-6 text-xl font-semibold text-cloud">Connect With Me</h3>
+              <div 
+                className="rounded-3xl backdrop-blur-xl p-8 flex-1 flex flex-col justify-center"
+                style={{
+                  background: 'rgba(30, 30, 30, 0.7)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  boxShadow: '0 8px 32px 0 rgba(249, 115, 22, 0.1)',
+                }}
+              >
+                <h3 className="mb-6 text-xl font-semibold text-white">Connect With Me</h3>
                 <div className="space-y-4">
                   {contactInfo.social.map((social) => {
                     const Icon = iconMap[social.icon];
@@ -124,10 +149,14 @@ export default function Contact() {
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-4 rounded-xl border border-white/10 bg-slate-800/50 px-4 py-3 transition hover:border-white/30 hover:bg-slate-800"
+                        className="flex items-center gap-4 rounded-xl backdrop-blur-md px-4 py-3 transition hover:bg-white/10"
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.05)',
+                          border: '1px solid rgba(255, 255, 255, 0.1)',
+                        }}
                       >
-                        <Icon className="h-5 w-5 text-cloud/70" />
-                        <span className="text-base text-cloud/80">{social.name}</span>
+                        <Icon className="h-5 w-5 text-[#f97316]" />
+                        <span className="text-base text-white">{social.name}</span>
                       </a>
                     );
                   })}
@@ -135,14 +164,26 @@ export default function Contact() {
               </div>
 
               {/* Direct Email */}
-              <div className="rounded-3xl border border-white/10 bg-slate-900 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur flex-1 flex flex-col justify-center">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
-                  <Mail className="h-6 w-6 text-cloud" />
+              <div 
+                className="rounded-3xl backdrop-blur-xl p-8 flex-1 flex flex-col justify-center"
+                style={{
+                  background: 'rgba(30, 30, 30, 0.7)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  boxShadow: '0 8px 32px 0 rgba(249, 115, 22, 0.1)',
+                }}
+              >
+                <div 
+                  className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl"
+                  style={{
+                    background: 'rgba(249, 115, 22, 0.2)',
+                  }}
+                >
+                  <Mail className="h-6 w-6 text-[#f97316]" />
                 </div>
-                <h3 className="mb-2 text-xl font-semibold text-cloud">Email</h3>
+                <h3 className="mb-2 text-xl font-semibold text-white">Email</h3>
                 <a
                   href={`mailto:${contactInfo.email}`}
-                  className="break-all text-base text-cloud/90 hover:text-cloud transition underline underline-offset-4 decoration-cloud/40 hover:decoration-cloud"
+                  className="break-all text-base text-white hover:text-[#f97316] transition underline underline-offset-4 decoration-white/40 hover:decoration-[#f97316]"
                 >
                   {contactInfo.email}
                 </a>
@@ -151,8 +192,15 @@ export default function Contact() {
 
             {/* Contact Form - Shows second on mobile, first on desktop */}
             <div className="lg:col-span-3 lg:order-1">
-              <div className="rounded-3xl border border-white/10 bg-slate-900 p-8 sm:p-10 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur">
-                <h3 className="mb-8 text-2xl font-semibold text-cloud sm:text-3xl">
+              <div 
+                className="rounded-3xl backdrop-blur-xl p-8 sm:p-10"
+                style={{
+                  background: 'rgba(30, 30, 30, 0.7)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  boxShadow: '0 8px 32px 0 rgba(249, 115, 22, 0.1)',
+                }}
+              >
+                <h3 className="mb-8 text-2xl font-semibold text-white sm:text-3xl">
                   Send a Message
                 </h3>
 
@@ -161,7 +209,7 @@ export default function Contact() {
                   <div>
                     <label
                       htmlFor="name"
-                      className="mb-2 block text-sm font-medium text-cloud/80"
+                      className="mb-2 block text-sm font-medium text-white"
                     >
                       Name
                     </label>
@@ -172,7 +220,19 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full rounded-xl border border-white/10 bg-slate-800/50 px-4 py-3 text-cloud placeholder:text-cloud/40 focus:border-white/30 focus:outline-none focus:ring-2 focus:ring-white/10 transition"
+                      className="w-full rounded-xl backdrop-blur-md px-4 py-3 text-white placeholder:text-white focus:outline-none transition"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.border = '1px solid rgba(249, 115, 22, 0.5)';
+                        e.target.style.boxShadow = '0 0 0 3px rgba(249, 115, 22, 0.1)';
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+                        e.target.style.boxShadow = 'none';
+                      }}
                       placeholder="Your name"
                     />
                   </div>
@@ -181,7 +241,7 @@ export default function Contact() {
                   <div>
                     <label
                       htmlFor="email"
-                      className="mb-2 block text-sm font-medium text-cloud/80"
+                      className="mb-2 block text-sm font-medium text-white"
                     >
                       Email
                     </label>
@@ -192,7 +252,19 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full rounded-xl border border-white/10 bg-slate-800/50 px-4 py-3 text-cloud placeholder:text-cloud/40 focus:border-white/30 focus:outline-none focus:ring-2 focus:ring-white/10 transition"
+                      className="w-full rounded-xl backdrop-blur-md px-4 py-3 text-white placeholder:text-white focus:outline-none transition"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.border = '1px solid rgba(249, 115, 22, 0.5)';
+                        e.target.style.boxShadow = '0 0 0 3px rgba(249, 115, 22, 0.1)';
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+                        e.target.style.boxShadow = 'none';
+                      }}
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -201,7 +273,7 @@ export default function Contact() {
                   <div>
                     <label
                       htmlFor="subject"
-                      className="mb-2 block text-sm font-medium text-cloud/80"
+                      className="mb-2 block text-sm font-medium text-white"
                     >
                       Subject
                     </label>
@@ -212,7 +284,19 @@ export default function Contact() {
                       value={formData.subject}
                       onChange={handleInputChange}
                       required
-                      className="w-full rounded-xl border border-white/10 bg-slate-800/50 px-4 py-3 text-cloud placeholder:text-cloud/40 focus:border-white/30 focus:outline-none focus:ring-2 focus:ring-white/10 transition"
+                      className="w-full rounded-xl backdrop-blur-md px-4 py-3 text-white placeholder:text-white focus:outline-none transition"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.border = '1px solid rgba(249, 115, 22, 0.5)';
+                        e.target.style.boxShadow = '0 0 0 3px rgba(249, 115, 22, 0.1)';
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+                        e.target.style.boxShadow = 'none';
+                      }}
                       placeholder="What's this about?"
                     />
                   </div>
@@ -221,7 +305,7 @@ export default function Contact() {
                   <div>
                     <label
                       htmlFor="message"
-                      className="mb-2 block text-sm font-medium text-cloud/80"
+                      className="mb-2 block text-sm font-medium text-white"
                     >
                       Message
                     </label>
@@ -232,7 +316,19 @@ export default function Contact() {
                       onChange={handleInputChange}
                       required
                       rows={6}
-                      className="w-full rounded-xl border border-white/10 bg-slate-800/50 px-4 py-3 text-cloud placeholder:text-cloud/40 focus:border-white/30 focus:outline-none focus:ring-2 focus:ring-white/10 transition resize-none"
+                      className="w-full rounded-xl backdrop-blur-md px-4 py-3 text-white placeholder:text-white focus:outline-none transition resize-none"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.border = '1px solid rgba(249, 115, 22, 0.5)';
+                        e.target.style.boxShadow = '0 0 0 3px rgba(249, 115, 22, 0.1)';
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+                        e.target.style.boxShadow = 'none';
+                      }}
                       placeholder="Your message..."
                     />
                   </div>
@@ -241,7 +337,12 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full rounded-xl bg-white/10 px-6 py-4 text-base font-semibold text-cloud transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-50 sm:text-lg"
+                    className="w-full rounded-xl backdrop-blur-md px-6 py-4 text-base font-semibold text-white transition hover:transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-50 sm:text-lg"
+                    style={{
+                      background: 'rgba(249, 115, 22, 0.3)',
+                      border: '1px solid rgba(249, 115, 22, 0.5)',
+                      boxShadow: '0 4px 16px 0 rgba(249, 115, 22, 0.2)',
+                    }}
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
                   </button>

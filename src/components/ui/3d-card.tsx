@@ -86,9 +86,14 @@ export const CardBody = ({
   return (
     <div
       className={cn(
-        "h-96 w-96 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]",
+        "h-96 w-96 [transform-style:preserve-3d] [&>*]:[transform-style:preserve-3d] backdrop-blur-xl rounded-3xl",
         className
       )}
+      style={{
+        background: 'rgba(30, 30, 30, 0.7)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        boxShadow: '0 8px 32px 0 rgba(249, 115, 22, 0.1)',
+      }}
     >
       {children}
     </div>

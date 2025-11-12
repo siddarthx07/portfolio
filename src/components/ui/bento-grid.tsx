@@ -36,17 +36,34 @@ export const BentoGridItem = ({
   return (
     <div
       className={cn(
-        "group/bento relative row-span-1 flex h-full flex-col space-y-4 overflow-hidden rounded-3xl border border-white/10 bg-slate-900 p-8 lg:p-10 shadow-[0_4px_20px_rgba(0,0,0,0.3)] backdrop-blur-sm transition duration-200 hover:border-white/20 hover:shadow-[0_8px_40px_rgba(0,0,0,0.5)]",
+        "group/bento relative row-span-1 flex h-full flex-col space-y-4 overflow-hidden rounded-3xl backdrop-blur-xl p-8 lg:p-10 transition duration-300",
         className,
       )}
+      style={{
+        background: 'rgba(30, 30, 30, 0.7)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        boxShadow: '0 8px 32px 0 rgba(249, 115, 22, 0.1)',
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.background = 'rgba(40, 40, 40, 0.8)';
+        e.currentTarget.style.border = '1px solid rgba(249, 115, 22, 0.3)';
+        e.currentTarget.style.boxShadow = '0 12px 40px 0 rgba(249, 115, 22, 0.2)';
+        e.currentTarget.style.transform = 'translateY(-4px)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.background = 'rgba(30, 30, 30, 0.7)';
+        e.currentTarget.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+        e.currentTarget.style.boxShadow = '0 8px 32px 0 rgba(249, 115, 22, 0.1)';
+        e.currentTarget.style.transform = 'translateY(0)';
+      }}
     >
       {header}
       <div className="transition duration-200 group-hover/bento:translate-x-1">
         {icon}
-        <div className="mb-2 mt-2 font-bold text-cloud">
+        <div className="mb-2 mt-2 font-bold text-white">
           {title}
         </div>
-        <div className="text-base font-normal leading-relaxed text-cloud/80">
+        <div className="text-base font-normal leading-relaxed text-white">
           {description}
         </div>
       </div>

@@ -91,12 +91,11 @@ export default function Projects() {
         <div className="sticky top-0 h-screen overflow-hidden">
           <section
             id="projects"
-            className="relative h-full text-cloud"
+            className="relative h-full text-white"
             style={{
               background: `
-                radial-gradient(ellipse at 20% 30%, #f9731633 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 70%, #f9731633 0%, transparent 50%),
-                linear-gradient(135deg, #05080f 0%, #0f172a 50%, #9ca3af22 100%)
+                radial-gradient(ellipse 1000px 800px at 70% 25%, rgba(249, 115, 22, 0.20) 0%, transparent 50%),
+                #000000
               `,
             }}
           >
@@ -108,7 +107,7 @@ export default function Projects() {
                     words="Projects"
                     className="text-4xl sm:text-5xl lg:text-6xl"
                   />
-                  <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-cloud/30 to-transparent" />
+                  <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-[#f97316] to-transparent" />
                 </div>
               </div>
             </div>
@@ -132,17 +131,17 @@ export default function Projects() {
                         className="inter-var"
                         containerClassName="items-start sm:items-center py-2 sm:py-4"
                       >
-                        <CardBody className="group/card relative h-auto w-[28rem] min-w-[28rem] sm:w-[30rem] sm:min-w-[30rem] lg:w-[34rem] lg:min-w-[34rem] xl:w-[38rem] xl:min-w-[38rem] 2xl:w-[40rem] 2xl:min-w-[40rem] rounded-3xl border border-white/10 px-6 py-5 sm:px-7 sm:py-6">
+                        <CardBody className="group/card relative h-auto w-[28rem] min-w-[28rem] sm:w-[30rem] sm:min-w-[30rem] lg:w-[34rem] lg:min-w-[34rem] xl:w-[38rem] xl:min-w-[38rem] 2xl:w-[40rem] 2xl:min-w-[40rem] px-6 py-5 sm:px-7 sm:py-6">
                           <CardItem
                             translateZ="50"
-                            className="text-3xl font-semibold text-cloud lg:text-4xl"
+                            className="text-3xl font-semibold text-white lg:text-4xl"
                           >
                             {project.title}
                           </CardItem>
                           <CardItem
                             as="p"
                             translateZ="60"
-                            className="text-cloud text-base max-w-2xl mt-3 leading-relaxed"
+                            className="text-white text-base max-w-2xl mt-3 leading-relaxed"
                           >
                             {project.description}
                           </CardItem>
@@ -161,7 +160,12 @@ export default function Projects() {
                             {project.skills.map((skill, skillIndex) => (
                               <span
                                 key={skillIndex}
-                                className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs uppercase tracking-[0.2em] text-cloud/85"
+                                className="rounded-full backdrop-blur-md px-3 py-1 text-xs uppercase tracking-[0.2em] font-semibold"
+                                style={{
+                                  background: 'rgba(249, 115, 22, 0.04)',
+                                  border: '1px solid rgba(249, 115, 22, 0.12)',
+                                  color: 'rgba(249, 115, 22, 0.6)',
+                                }}
                               >
                                 {skill}
                               </span>
@@ -174,7 +178,7 @@ export default function Projects() {
                                 as="a"
                                 href={project.links.github}
                                 target="_blank"
-                                className="px-5 py-2 rounded-xl text-sm font-normal text-cloud hover:text-white transition"
+                                className="px-5 py-2 rounded-xl text-sm font-normal text-white hover:text-[#f97316] transition"
                               >
                                 GitHub →
                               </CardItem>
@@ -185,7 +189,11 @@ export default function Projects() {
                                 as="a"
                                 href={project.links.live}
                                 target="_blank"
-                                className="px-5 py-2 rounded-xl bg-white/10 text-cloud text-sm font-bold hover:bg-white/20 transition"
+                                className="px-5 py-2 rounded-xl text-white text-sm font-bold transition backdrop-blur-md"
+                                style={{
+                                  background: 'rgba(249, 115, 22, 0.3)',
+                                  border: '1px solid rgba(249, 115, 22, 0.5)',
+                                }}
                               >
                                 Live Demo
                               </CardItem>
@@ -194,7 +202,11 @@ export default function Projects() {
                               <CardItem
                                 translateZ={20}
                                 as="p"
-                                className="px-5 py-2 rounded-xl bg-white/5 text-cloud/50 text-sm font-normal italic"
+                                className="px-5 py-2 rounded-xl text-white text-sm font-normal italic backdrop-blur-md"
+                                style={{
+                                  background: 'rgba(255, 255, 255, 0.05)',
+                                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                                }}
                               >
                                 Code &amp; demo unavailable due to NDA
                               </CardItem>
@@ -214,12 +226,11 @@ export default function Projects() {
       {/* Mobile: Vertical Stack */}
       <section
         id="projects-mobile"
-        className="relative block overflow-hidden py-12 text-cloud md:hidden"
+        className="relative block overflow-hidden py-12 text-white md:hidden"
         style={{
           background: `
-            radial-gradient(ellipse at 20% 30%, #f9731633 0%, transparent 50%),
-            radial-gradient(ellipse at 80% 70%, #f9731633 0%, transparent 50%),
-            linear-gradient(135deg, #05080f 0%, #0f172a 50%, #9ca3af22 100%)
+            radial-gradient(ellipse 800px 600px at 70% 25%, rgba(249, 115, 22, 0.20) 0%, transparent 50%),
+            #000000
           `,
         }}
       >
@@ -230,7 +241,7 @@ export default function Projects() {
               words="Projects"
               className="text-4xl sm:text-5xl"
             />
-            <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-cloud/30 to-transparent" />
+            <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-[#f97316] to-transparent" />
           </div>
 
           {/* Vertical Stack of Cards */}
@@ -241,11 +252,18 @@ export default function Projects() {
               return (
                 <div key={index} className="flex items-center justify-center">
                   <div className="w-full max-w-md">
-                    <div className="group/card relative h-auto w-full rounded-3xl border border-white/10 bg-slate-900 p-5 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur">
-                      <h3 className="text-2xl font-semibold text-cloud">
+                    <div 
+                      className="group/card relative h-auto w-full rounded-3xl backdrop-blur-xl p-5 transition duration-300 hover:transform hover:scale-[1.02]"
+                      style={{
+                        background: 'rgba(30, 30, 30, 0.7)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        boxShadow: '0 8px 32px 0 rgba(249, 115, 22, 0.1)',
+                      }}
+                    >
+                      <h3 className="text-2xl font-semibold text-white">
                         {project.title}
                       </h3>
-                      <p className="mt-3 text-sm leading-relaxed text-cloud">
+                      <p className="mt-3 text-sm leading-relaxed text-white">
                         {project.description}
                       </p>
                       <div className="mt-5 w-full">
@@ -263,7 +281,12 @@ export default function Projects() {
                         {project.skills.map((skill, skillIndex) => (
                           <span
                             key={skillIndex}
-                            className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs uppercase tracking-[0.2em] text-cloud/85"
+                            className="rounded-full backdrop-blur-md px-3 py-1 text-xs uppercase tracking-[0.2em] font-semibold"
+                            style={{
+                              background: 'rgba(249, 115, 22, 0.04)',
+                              border: '1px solid rgba(249, 115, 22, 0.12)',
+                              color: 'rgba(249, 115, 22, 0.6)',
+                            }}
                           >
                             {skill}
                           </span>
@@ -274,7 +297,7 @@ export default function Projects() {
                           <a
                             href={project.links.github}
                             target="_blank"
-                            className="rounded-xl px-4 py-2 text-sm font-normal text-cloud hover:text-white transition"
+                            className="rounded-xl px-4 py-2 text-sm font-normal text-white hover:text-[#f97316] transition"
                           >
                             GitHub →
                           </a>
@@ -283,13 +306,23 @@ export default function Projects() {
                           <a
                             href={project.links.live}
                             target="_blank"
-                            className="rounded-xl bg-white/10 px-4 py-2 text-sm font-bold text-cloud hover:bg-white/20 transition"
+                            className="rounded-xl px-4 py-2 text-sm font-bold text-white transition backdrop-blur-md"
+                            style={{
+                              background: 'rgba(249, 115, 22, 0.3)',
+                              border: '1px solid rgba(249, 115, 22, 0.5)',
+                            }}
                           >
                             Live Demo
                           </a>
                         )}
                         {project.nda && (
-                          <p className="rounded-xl bg-white/5 px-4 py-2 text-sm font-normal italic text-cloud/50">
+                          <p 
+                            className="rounded-xl px-4 py-2 text-sm font-normal italic text-white backdrop-blur-md"
+                            style={{
+                              background: 'rgba(255, 255, 255, 0.05)',
+                              border: '1px solid rgba(255, 255, 255, 0.1)',
+                            }}
+                          >
                             Code &amp; demo unavailable due to NDA
                           </p>
                         )}

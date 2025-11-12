@@ -1,13 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  --background: #060608;
-  --foreground: #f9fbff;
-  --night: #05060a;
-  --cloud: #f5f7fb;
-  --slate: #9099b7;
-  --accent: 255 98 214;
-  --accent-secondary: 64 132 255;
+  /* Dark Glass Theme - Black, Orange, White */
+  --background: #000000;
+  --foreground: #ffffff;
+  --night: #000000;
+  --cloud: #ffffff;
+  
+  /* Orange Accent System */
+  --orange-primary: #f97316;
+  --orange-secondary: #facc15;
+  --orange-glow: rgba(249, 115, 22, 0.15);
+  --orange-border: rgba(249, 115, 22, 0.2);
+  
+  /* Glass Card System */
+  --glass-bg: rgba(30, 30, 30, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-hover: rgba(40, 40, 40, 0.8);
+  
+  /* Legacy support (will be phased out) */
+  --slate: #1e1e1e;
+  --accent: 249 115 22;
+  --accent-secondary: 250 204 21;
 }
 
 @theme inline {
@@ -16,8 +30,10 @@
   --color-night: var(--night);
   --color-cloud: var(--cloud);
   --color-slate: var(--slate);
-  --color-accent: rgb(var(--accent));
-  --color-accent-secondary: rgb(var(--accent-secondary));
+  --color-accent: var(--orange-primary);
+  --color-accent-secondary: var(--orange-secondary);
+  --color-orange-primary: var(--orange-primary);
+  --color-orange-secondary: var(--orange-secondary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-heading);
@@ -28,13 +44,30 @@
 }
 
 body {
-  background: var(--color-night);
-  color: var(--color-cloud);
+  background: #000000;
+  color: #ffffff;
   font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glass effect utility classes */
+.glass-card {
+  background: rgba(30, 30, 30, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(249, 115, 22, 0.1);
+}
+
+.glass-card:hover {
+  background: rgba(40, 40, 40, 0.8);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  box-shadow: 0 12px 40px 0 rgba(249, 115, 22, 0.2);
+  transform: translateY(-4px);
+  transition: all 0.3s ease;
 }
 
 /* Mobile optimizations */

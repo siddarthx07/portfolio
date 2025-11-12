@@ -48,7 +48,12 @@ function TechPills({ items }: { items: string[] }) {
       {items.map((tech) => (
         <span
           key={tech}
-          className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs sm:px-5 sm:py-2 sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.25em] text-cloud/60"
+          className="rounded-full backdrop-blur-md px-3 py-1.5 text-xs sm:px-5 sm:py-2 sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.25em] font-semibold"
+          style={{
+            background: 'rgba(249, 115, 22, 0.04)',
+            border: '1px solid rgba(249, 115, 22, 0.12)',
+            color: 'rgba(249, 115, 22, 0.6)',
+          }}
         >
           {tech}
         </span>
@@ -61,21 +66,28 @@ export default function Experience() {
   const timelineData: TimelineEntry[] = experience.map((item) => ({
     title: item.yearLabel,
     content: (
-      <div className="mt-6 rounded-3xl border border-white/10 bg-slate-900 p-6 sm:p-10 lg:p-12 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur">
+      <div 
+        className="mt-6 rounded-3xl backdrop-blur-xl p-6 sm:p-10 lg:p-12 transition duration-300 hover:transform hover:scale-[1.02]"
+        style={{
+          background: 'rgba(30, 30, 30, 0.7)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          boxShadow: '0 8px 32px 0 rgba(249, 115, 22, 0.1)',
+        }}
+      >
         <div className="space-y-2 text-left sm:space-y-3">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cloud/70 sm:text-base sm:tracking-[0.4em]">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white sm:text-base sm:tracking-[0.4em]">
             {item.period}
           </p>
-          <h3 className="text-xl font-semibold text-cloud sm:text-2xl lg:text-3xl">
+          <h3 className="text-xl font-semibold text-white sm:text-2xl lg:text-3xl">
             {item.heading}
           </h3>
         </div>
-        <p className="mt-4 text-base text-cloud/90 sm:mt-6 sm:text-xl lg:text-2xl leading-relaxed">{item.highlight}</p>
+        <p className="mt-4 text-base text-white sm:mt-6 sm:text-xl lg:text-2xl leading-relaxed">{item.highlight}</p>
         {item.bullets.length > 0 && (
-          <ul className="mt-6 space-y-3 text-sm sm:mt-8 sm:space-y-4 sm:text-base lg:text-lg text-cloud/80">
+          <ul className="mt-6 space-y-3 text-sm sm:mt-8 sm:space-y-4 sm:text-base lg:text-lg text-white">
             {item.bullets.map((bullet) => (
               <li key={bullet} className="flex gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-cloud/60 flex-shrink-0" />
+                <span className="mt-2 h-2 w-2 rounded-full bg-[#f97316] flex-shrink-0" />
                 <span className="leading-relaxed">{bullet}</span>
               </li>
             ))}
@@ -89,12 +101,11 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="relative py-24 text-cloud sm:py-32"
+      className="relative py-24 text-white sm:py-32"
       style={{
         background: `
-          radial-gradient(ellipse at 20% 30%, #f9731633 0%, transparent 50%),
-          radial-gradient(ellipse at 80% 70%, #f9731633 0%, transparent 50%),
-          linear-gradient(135deg, #05080f 0%, #0f172a 50%, #9ca3af22 100%)
+          radial-gradient(ellipse 1000px 800px at 75% 30%, rgba(249, 115, 22, 0.18) 0%, transparent 50%),
+          #000000
         `,
       }}
     >
@@ -105,7 +116,7 @@ export default function Experience() {
             words="Experience"
             className="text-4xl sm:text-5xl lg:text-6xl"
           />
-          <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-cloud/30 to-transparent" />
+          <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-[#f97316] to-transparent" />
         </div>
 
         <div className="relative w-full">

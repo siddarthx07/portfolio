@@ -44,7 +44,7 @@ export const CodeScroll = () => {
             >
               {snippet.lang}
             </span>
-            <code className="text-cloud/70">{snippet.code}</code>
+            <code className="text-white">{snippet.code}</code>
           </div>
         ))}
       </motion.div>

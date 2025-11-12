@@ -97,7 +97,7 @@ export const FocusCards = ({
                     opacity: hovered === index ? 1 : 0,
                   }}
                   transition={{ duration: 0.3 }}
-                  className="text-sm sm:text-base text-cloud/90 leading-relaxed"
+                  className="text-sm sm:text-base text-white leading-relaxed"
                 >
                   {card.description}
                 </motion.div>

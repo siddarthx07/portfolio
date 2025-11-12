@@ -36,7 +36,7 @@ const experience: ExperienceEntry[] = [
     yearLabel: "APR 2024 – JUL 2024",
     heading: "Software Engineering Intern",
     highlight:
-      "Optimized Java batch processing (–25% time) and designed a reusable React library that cut reporting bugs by half.",
+      "Optimized Java batch processing (~25% time) and designed a reusable React library that cut reporting bugs by half.",
     bullets: [],
     stack: ["Java", "React", "Spring", "PostgreSQL"],
   },

@@ -8,6 +8,7 @@ import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 // Lazy load heavy section components
 const About = lazy(() => import("@/components/sections/about"));
 const Experience = lazy(() => import("@/components/sections/experience"));
+const FeaturedProject = lazy(() => import("@/components/sections/featured-project"));
 const Projects = lazy(() => import("@/components/sections/projects"));
 const Contact = lazy(() => import("@/components/sections/contact"));
 
@@ -212,6 +213,7 @@ export default function Home() {
       >
         <About />
         <Experience />
+        <FeaturedProject />
         <Projects />
         <Contact />
       </Suspense>

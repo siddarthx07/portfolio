@@ -2,6 +2,8 @@
 
 Modern, interactive portfolio showcasing full-stack development expertise and AI-driven projects with immersive animations and responsive design.
 
+🌐 **Live Site**: [siddarthbandi.vercel.app](https://siddarthbandi.vercel.app/)
+
 ## Quick Start
 
 - `npm install` – install dependencies  

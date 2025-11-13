@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Siddarth Bandi | Software Engineer Portfolio",
     description:
-      "Portfolio showcasing immersive 3D interfaces, scalable systems, and AI-driven experiences.",
+      "Portfolio highlighting full-stack engineering, scalable systems, and AI-driven experiences.",
     url: "https://siddarthbandi.vercel.app",
     siteName: "Siddarth Bandi Portfolio",
     locale: "en_US",

@@ -81,6 +81,21 @@ export default function Projects() {
 
   return (
     <>
+      {/* Desktop: Title Section (scrolls away) */}
+      <div
+        className="relative hidden md:block text-white pt-8 pb-16 bg-black"
+      >
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="text-center">
+            <TextGenerateEffect
+              words="Projects"
+              className="text-4xl sm:text-5xl lg:text-6xl"
+            />
+            <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-[#f97316] to-transparent" />
+          </div>
+        </div>
+      </div>
+
       {/* Desktop: Horizontal Scroll Wrapper */}
       <div
         ref={wrapperRef}
@@ -94,31 +109,17 @@ export default function Projects() {
             className="relative h-full text-white"
             style={{
               background: `
-                radial-gradient(ellipse 1000px 800px at 70% 25%, rgba(249, 115, 22, 0.20) 0%, transparent 50%),
+                radial-gradient(ellipse 1000px 800px at 70% 55%, rgba(249, 115, 22, 0.20) 0%, transparent 50%),
                 #000000
               `,
             }}
           >
-            {/* Title Section */}
-            <div className="absolute left-0 right-0 top-0 z-10 pt-8 sm:pt-10 lg:pt-12">
-              <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <div className="text-center">
-                  <TextGenerateEffect
-                    words="Projects"
-                    className="text-4xl sm:text-5xl lg:text-6xl"
-                  />
-                  <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-[#f97316] to-transparent" />
-                </div>
-              </div>
-            </div>
-
             {/* Horizontal Scrolling Container */}
-            <div className="absolute inset-0 flex items-center overflow-hidden pt-28 sm:pt-32 lg:pt-36">
+            <div className="absolute inset-0 flex items-center overflow-hidden">
               <div
                 ref={containerRef}
                 className="flex gap-8 lg:gap-12 xl:gap-16"
                 style={{
-                  transform: "translateX(0px)",
                   willChange: "transform",
                 }}
               >
@@ -134,14 +135,14 @@ export default function Projects() {
                         <CardBody className="group/card relative h-auto w-[28rem] min-w-[28rem] sm:w-[30rem] sm:min-w-[30rem] lg:w-[34rem] lg:min-w-[34rem] xl:w-[38rem] xl:min-w-[38rem] 2xl:w-[40rem] 2xl:min-w-[40rem] px-6 py-5 sm:px-7 sm:py-6">
                           <CardItem
                             translateZ="50"
-                            className="text-3xl font-semibold text-white lg:text-4xl"
+                            className="text-3xl font-semibold text-white lg:text-4xl mt-4 mb-2"
                           >
                             {project.title}
                           </CardItem>
                           <CardItem
                             as="p"
                             translateZ="60"
-                            className="text-white text-base max-w-2xl mt-3 leading-relaxed"
+                            className="text-white text-base max-w-2xl mt-6 leading-relaxed"
                           >
                             {project.description}
                           </CardItem>
@@ -229,7 +230,7 @@ export default function Projects() {
         className="relative block overflow-hidden py-12 text-white md:hidden"
         style={{
           background: `
-            radial-gradient(ellipse 800px 600px at 70% 25%, rgba(249, 115, 22, 0.20) 0%, transparent 50%),
+            radial-gradient(ellipse 800px 600px at 70% 55%, rgba(249, 115, 22, 0.20) 0%, transparent 50%),
             #000000
           `,
         }}

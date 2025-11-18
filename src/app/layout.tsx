@@ -75,6 +75,14 @@ export const metadata: Metadata = {
     description:
       "Software Engineer building scalable full-stack systems and AI-driven applications.",
     creator: "@siddarthbandi",
+    images: [
+      {
+        url: "https://siddarthbandi.vercel.app/og-card.png",
+        width: 1200,
+        height: 630,
+        alt: "Siddarth Bandi portfolio preview",
+      },
+    ],
   },
   robots: {
     index: true,

@@ -4,12 +4,11 @@ import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { projects } from "@/data/projects";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function Projects() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -32,8 +31,7 @@ export default function Projects() {
       const currentScroll = -rect.top;
       
       const progress = Math.max(0, Math.min(1, (currentScroll - scrollStart) / scrollEnd));
-      setScrollProgress(progress);
-      
+
       // Get viewport and container dimensions
       const viewportWidth = window.innerWidth;
       const containerWidth = container.scrollWidth;
@@ -118,7 +116,7 @@ export default function Projects() {
             <div className="absolute inset-0 flex items-center overflow-hidden">
               <div
                 ref={containerRef}
-                className="flex gap-8 lg:gap-12 xl:gap-16"
+                className="flex gap-12 lg:gap-16 xl:gap-24"
                 style={{
                   willChange: "transform",
                 }}

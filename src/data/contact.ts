@@ -14,7 +14,7 @@ export const contactInfo = {
     },
   ],
   resume: {
-    url: "https://drive.google.com/file/d/1xd91wVOO-snEIQ-nffthl2Nrpi9nopV0/view",
+    url: "https://drive.google.com/file/d/16ZJi0vl6E4tpQih1BnXvdrsY9ai39AqU/view?usp=sharing",
     filename: "Siddarth_Bandi_Resume.pdf",
   },
 };

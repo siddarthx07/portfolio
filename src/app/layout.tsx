@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://siddarthbandi.vercel.app/og-card.png",
+        url: "https://siddarthbandi.vercel.app/og-card.png?v=2",
         width: 1200,
         height: 630,
         alt: "Siddarth Bandi portfolio preview",
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     creator: "@siddarthbandi",
     images: [
       {
-        url: "https://siddarthbandi.vercel.app/og-card.png",
+        url: "https://siddarthbandi.vercel.app/og-card.png?v=2",
         width: 1200,
         height: 630,
         alt: "Siddarth Bandi portfolio preview",

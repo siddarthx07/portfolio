@@ -42,9 +42,6 @@ export default function Projects() {
       
       const cardWidth = firstCard.offsetWidth;
       
-      // Calculate how much we need to scroll
-      const maxScroll = containerWidth - viewportWidth;
-      
       // Start position: first card centered
       const startOffset = (viewportWidth - cardWidth) / 2;
       

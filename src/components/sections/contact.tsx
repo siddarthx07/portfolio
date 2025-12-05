@@ -351,7 +351,7 @@ export default function Contact() {
                   {submitStatus === "success" && (
                     <div className="flex items-center gap-2 rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-green-400">
                       <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
-                      <p className="text-sm">Message sent successfully! I'll get back to you soon.</p>
+                      <p className="text-sm">{`Message sent successfully! I'll get back to you soon.`}</p>
                     </div>
                   )}
 

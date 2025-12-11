@@ -111,7 +111,8 @@ type CardItemProps = {
   rotateX?: number | string;
   rotateY?: number | string;
   rotateZ?: number | string;
-} & React.HTMLAttributes<HTMLElement>;
+} & React.HTMLAttributes<HTMLElement> &
+  React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 export const CardItem = ({
   as: Tag = "div",

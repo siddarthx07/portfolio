@@ -14,22 +14,31 @@ type ExperienceEntry = {
 
 const experience: ExperienceEntry[] = [
   {
-    period: "Virginia Tech",
-    yearLabel: "JAN 2025 – PRESENT",
-    heading: "Research Assistant · Software Engineering",
+    period: "Virginia Tech – Tidewater AREC",
+    yearLabel: "MAR 2025 – MAY 2026",
+    heading: "Software Engineer",
     highlight:
-      "Built an AI-driven precision agriculture platform that improved crop disease detection accuracy by 85%. Integrated thermal imaging, NDVI satellite data, and real-time GPS mapping for precision irrigation and targeted disease treatment.",
+      "Built a full-stack AI agriculture platform with a RAG pipeline (GPT-4o, LangChain, vector embeddings) at 90%+ relevance and sub-500ms responses, a YOLOv8/PyTorch disease classifier at 85% accuracy across 20k+ images, and a Spring Boot REST API deployed on AWS with GitHub Actions CI/CD.",
     bullets: [],
-    stack: ["Swift", "Kotlin", "CoreML", "REST", "AWS"],
+    stack: ["Python", "LangChain", "GPT-4o", "PyTorch", "AWS"],
   },
   {
     period: "Aurus.ai",
     yearLabel: "MAY 2025 – JUL 2025",
     heading: "Software Engineer Intern",
     highlight:
-      "Delivered an enterprise chatbot using LangChain + FAISS to help employees find compliance documents 60% faster.",
+      "Built a secure enterprise RAG chatbot (FastAPI, LangChain, LangGraph, FAISS) for real-time PDF Q&A, cutting document search time by 60%. Integrated a Scikit-learn query classifier with RBAC and audit logging, blocking 92% of unauthorized access attempts. Deployed LLM services on Azure OpenAI and AWS Bedrock, using Databricks to orchestrate data pipelines and benchmark model quality.",
     bullets: [],
-    stack: ["Python", "LangChain", "FAISS", "Firebase", "RAG"],
+    stack: ["Python", "LangChain", "FastAPI", "Azure OpenAI", "AWS Bedrock"],
+  },
+  {
+    period: "Marine Corps Community Services",
+    yearLabel: "SEP 2024 – FEB 2025",
+    heading: "Software Engineer · Arlington, VA",
+    highlight:
+      "Developed and integrated 15+ REST APIs into a fraud detection platform, provisioned ML model artifact infrastructure on AWS achieving a 30% reduction in data retrieval time, and implemented secure JWT-based authentication with sub-500ms OTP delivery.",
+    bullets: [],
+    stack: ["React", "Node.js", "MongoDB", "AWS", "Jenkins"],
   },
   {
     period: "Centre for Economic and Social Studies",

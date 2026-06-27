@@ -1,222 +1,268 @@
 "use client";
 
-import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
-import { projects } from "@/data/projects";
+import { projects, type Project } from "@/data/projects";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 
-export default function Projects() {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+const clamp = (value: number, min: number, max: number) =>
+  Math.max(min, Math.min(max, value));
 
-  useEffect(() => {
-    const wrapper = wrapperRef.current;
-    const container = containerRef.current;
+function ProjectLinks({ project }: { project: Project }) {
+  return (
+    <div className="mt-7 flex flex-wrap items-center gap-3">
+      {!project.nda && project.links?.github && (
+        <a
+          href={project.links.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-xl px-5 py-2 text-sm font-normal text-white transition hover:text-[#f97316]"
+        >
+          GitHub →
+        </a>
+      )}
+      {!project.nda && project.links?.live && (
+        <a
+          href={project.links.live}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-xl px-5 py-2 text-sm font-bold text-white backdrop-blur-md transition hover:scale-[1.03]"
+          style={{
+            background: "rgba(249, 115, 22, 0.3)",
+            border: "1px solid rgba(249, 115, 22, 0.5)",
+          }}
+        >
+          Live Demo
+        </a>
+      )}
+      {project.nda && (
+        <p
+          className="rounded-xl px-5 py-2 text-sm font-normal italic text-white backdrop-blur-md"
+          style={{
+            background: "rgba(255, 255, 255, 0.05)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+          }}
+        >
+          Code &amp; demo unavailable due to NDA
+        </p>
+      )}
+    </div>
+  );
+}
 
-    if (!wrapper || !container) return;
+function SkillPills({ skills }: { skills: string[] }) {
+  return (
+    <div className="mt-6 flex flex-wrap gap-2">
+      {skills.map((skill, i) => (
+        <span
+          key={i}
+          className="rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] backdrop-blur-md"
+          style={{
+            background: "rgba(249, 115, 22, 0.04)",
+            border: "1px solid rgba(249, 115, 22, 0.12)",
+            color: "rgba(249, 115, 22, 0.6)",
+          }}
+        >
+          {skill}
+        </span>
+      ))}
+    </div>
+  );
+}
 
-    const handleScroll = () => {
-      const rect = wrapper.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      
-      // Only calculate when section is in view
-      if (rect.bottom < 0 || rect.top > windowHeight) {
-        return;
-      }
-      
-      // Calculate scroll progress within the wrapper
-      const scrollStart = 0;
-      const scrollEnd = rect.height - windowHeight;
-      const currentScroll = -rect.top;
-      
-      const progress = Math.max(0, Math.min(1, (currentScroll - scrollStart) / scrollEnd));
+const PROJECTS_HEADER_OFFSET = "10.5rem";
 
-      // Get viewport and container dimensions
-      const viewportWidth = window.innerWidth;
-      const containerWidth = container.scrollWidth;
-      
-      // Get first card dimensions
-      const firstCard = container.firstElementChild as HTMLElement;
-      if (!firstCard) return;
-      
-      const cardWidth = firstCard.offsetWidth;
-      
-      // Start position: first card centered
-      const startOffset = (viewportWidth - cardWidth) / 2;
-      
-      // End position: last card centered
-      // We need to calculate where the last card should end up
-      const lastCardOffset = containerWidth - cardWidth - startOffset;
-      
-      // Calculate translation based on progress
-      // At progress 0: translateX = startOffset (first card centered)
-      // At progress 1: translateX = -(lastCardOffset) (last card centered)
-      const translateX = startOffset - (progress * (startOffset + lastCardOffset));
-      
-      container.style.transform = `translateX(${translateX}px)`;
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll, { passive: true });
-    
-    // Initial call with slight delay to ensure layout is ready
-    requestAnimationFrame(() => {
-      setTimeout(handleScroll, 100);
-    });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
-  }, []);
-
-  // Calculate wrapper height for scroll distance
-  const wrapperHeight = "300vh"; // 3x viewport height for smooth scrolling
+function DesktopCard({
+  project,
+  index,
+  total,
+  cardRef,
+}: {
+  project: Project;
+  index: number;
+  total: number;
+  cardRef: (el: HTMLDivElement | null) => void;
+}) {
+  const cardNumber = String(index + 1).padStart(2, "0");
 
   return (
-    <>
-      {/* Desktop: Title Section (scrolls away) */}
+    <div
+      className="sticky flex items-center justify-center"
+      style={{
+        top: PROJECTS_HEADER_OFFSET,
+        height: `calc(100vh - ${PROJECTS_HEADER_OFFSET})`,
+      }}
+    >
       <div
-        className="relative hidden md:block text-white pt-8 pb-16 bg-black"
+        ref={cardRef}
+        data-index={index}
+        style={{ transformOrigin: "top center", willChange: "transform" }}
+        className="relative mx-auto flex w-[90%] max-w-6xl overflow-hidden rounded-[2rem]"
       >
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center">
-            <TextGenerateEffect
-              words="Projects"
-              className="text-4xl sm:text-5xl lg:text-6xl"
+        {/* Glass surface */}
+        <div
+          className="absolute inset-0 -z-10 rounded-[2rem]"
+          style={{
+            background: "rgb(18, 18, 18)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            boxShadow: "0 24px 60px 0 rgba(249, 115, 22, 0.12)",
+          }}
+        />
+        {/* Orange accent glow on the image side (right) */}
+        <div
+          className="pointer-events-none absolute -z-10 right-0 top-0 h-[28rem] w-[28rem] rounded-full blur-3xl"
+          style={{ background: "rgba(249, 115, 22, 0.18)" }}
+          aria-hidden="true"
+        />
+
+        <div className="flex h-[32rem] w-full flex-col lg:flex-row">
+          {/* Text side (left) */}
+          <div className="flex h-1/2 w-full flex-col justify-center p-7 sm:p-9 lg:h-full lg:w-[45%] lg:p-12">
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-bold tracking-[0.3em] text-[#f97316]">
+                {cardNumber}
+              </span>
+              <span className="h-px w-10 bg-gradient-to-r from-[#f97316] to-transparent" />
+              <span className="text-xs uppercase tracking-[0.3em] text-white/40">
+                {`/ ${String(total).padStart(2, "0")}`}
+              </span>
+            </div>
+            <h3 className="mt-3 text-2xl font-semibold text-white sm:text-3xl lg:text-4xl">
+              {project.title}
+            </h3>
+            <p className="mt-4 text-sm leading-relaxed text-white/85 sm:text-base">
+              {project.description}
+            </p>
+            <SkillPills skills={project.skills} />
+            <ProjectLinks project={project} />
+          </div>
+
+          {/* Image side (right) */}
+          <div className="relative h-1/2 w-full overflow-hidden lg:h-full lg:w-[55%]">
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              sizes="(min-width: 1024px) 55vw, 90vw"
+              className="object-contain p-4 lg:p-6"
+              quality={75}
+              unoptimized
             />
-            <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-[#f97316] to-transparent" />
           </div>
         </div>
       </div>
+    </div>
+  );
+}
 
-      {/* Desktop: Horizontal Scroll Wrapper */}
+export default function Projects() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const cardEls = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const total = projects.length;
+    // Release title near the end of the last card's scroll
+    const titleReleaseProgress = (total - 0.35) / total;
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const vh = window.innerHeight;
+      const containerTop = container.getBoundingClientRect().top + window.scrollY;
+      const scrollable = container.offsetHeight - vh;
+      if (scrollable <= 0) return;
+
+      const globalProgress = clamp(
+        (window.scrollY - containerTop) / scrollable,
+        0,
+        1,
+      );
+
+      const title = titleRef.current;
+      if (title) {
+        title.style.position =
+          globalProgress >= titleReleaseProgress ? "relative" : "sticky";
+      }
+
+      cardEls.current.forEach((card, i) => {
+        if (!card) return;
+
+        // Covered cards shrink as the next card slides over them.
+        const start = i / total;
+        const targetScale = 1 - (total - i) * 0.04;
+        const coverProgress = clamp((globalProgress - start) / (1 - start), 0, 1);
+        const scale = 1 - (1 - targetScale) * coverProgress;
+        const offsetY = i * 28;
+        card.style.transform = `translateY(${offsetY}px) scale(${scale})`;
+      });
+    };
+
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(update);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return (
+    <>
+      {/* Desktop: Sticky Stack of Cards */}
       <div
-        ref={wrapperRef}
-        style={{ height: wrapperHeight }}
+        id="projects"
         className="relative hidden md:block"
+        style={{
+          background: `
+            radial-gradient(ellipse 1000px 800px at 70% 30%, rgba(249, 115, 22, 0.16) 0%, transparent 50%),
+            #000000
+          `,
+        }}
       >
-        {/* Sticky container */}
-        <div className="sticky top-0 h-screen overflow-hidden">
-          <section
-            id="projects"
-            className="relative h-full text-white"
-            style={{
-              background: `
-                radial-gradient(ellipse 1000px 800px at 70% 55%, rgba(249, 115, 22, 0.20) 0%, transparent 50%),
-                #000000
-              `,
-            }}
+        {/* Sticky boundary: title unsticks once card stack scroll is done */}
+        <div className="relative">
+          <div
+            ref={titleRef}
+            className="sticky top-0 z-30 bg-black px-6 pb-5 pt-16 text-white lg:px-8"
           >
-            {/* Horizontal Scrolling Container */}
-            <div className="absolute inset-0 flex items-center overflow-hidden">
-              <div
-                ref={containerRef}
-                className="flex gap-12 lg:gap-16 xl:gap-24"
-                style={{
-                  willChange: "transform",
-                }}
-              >
-                {projects.map((project, index) => {
-                  const imageClass = "h-80 w-full object-contain rounded-xl group-hover/card:shadow-xl";
-
-                  return (
-                    <div key={index} className="flex-shrink-0 flex items-center justify-center">
-                      <CardContainer
-                        className="inter-var"
-                        containerClassName="items-start sm:items-center py-2 sm:py-4"
-                      >
-                        <CardBody className="group/card relative h-auto w-[28rem] min-w-[28rem] sm:w-[30rem] sm:min-w-[30rem] lg:w-[34rem] lg:min-w-[34rem] xl:w-[38rem] xl:min-w-[38rem] 2xl:w-[40rem] 2xl:min-w-[40rem] px-6 py-5 sm:px-7 sm:py-6">
-                          <CardItem
-                            translateZ="50"
-                            className="text-3xl font-semibold text-white lg:text-4xl mt-4 mb-2"
-                          >
-                            {project.title}
-                          </CardItem>
-                          <CardItem
-                            as="p"
-                            translateZ="60"
-                            className="text-white text-base max-w-2xl mt-6 leading-relaxed"
-                          >
-                            {project.description}
-                          </CardItem>
-                          <CardItem translateZ="100" className="w-full mt-6 mb-8">
-                            <Image
-                              src={project.image}
-                              alt={project.title}
-                              width={1000}
-                              height={600}
-                              className={imageClass}
-                              quality={100}
-                              unoptimized
-                            />
-                          </CardItem>
-                          <div className="flex flex-wrap gap-2 mt-6">
-                            {project.skills.map((skill, skillIndex) => (
-                              <span
-                                key={skillIndex}
-                                className="rounded-full backdrop-blur-md px-3 py-1 text-xs uppercase tracking-[0.2em] font-semibold"
-                                style={{
-                                  background: 'rgba(249, 115, 22, 0.04)',
-                                  border: '1px solid rgba(249, 115, 22, 0.12)',
-                                  color: 'rgba(249, 115, 22, 0.6)',
-                                }}
-                              >
-                                {skill}
-                              </span>
-                            ))}
-                          </div>
-                          <div className="flex flex-wrap items-center gap-3 mt-6">
-                            {!project.nda && project.links?.github && (
-                              <CardItem
-                                translateZ={20}
-                                as="a"
-                                href={project.links.github}
-                                target="_blank"
-                                className="px-5 py-2 rounded-xl text-sm font-normal text-white hover:text-[#f97316] transition"
-                              >
-                                GitHub →
-                              </CardItem>
-                            )}
-                            {!project.nda && project.links?.live && (
-                              <CardItem
-                                translateZ={20}
-                                as="a"
-                                href={project.links.live}
-                                target="_blank"
-                                className="px-5 py-2 rounded-xl text-white text-sm font-bold transition backdrop-blur-md"
-                                style={{
-                                  background: 'rgba(249, 115, 22, 0.3)',
-                                  border: '1px solid rgba(249, 115, 22, 0.5)',
-                                }}
-                              >
-                                Live Demo
-                              </CardItem>
-                            )}
-                            {project.nda && (
-                              <CardItem
-                                translateZ={20}
-                                as="p"
-                                className="px-5 py-2 rounded-xl text-white text-sm font-normal italic backdrop-blur-md"
-                                style={{
-                                  background: 'rgba(255, 255, 255, 0.05)',
-                                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                                }}
-                              >
-                                Code &amp; demo unavailable due to NDA
-                              </CardItem>
-                            )}
-                          </div>
-                        </CardBody>
-                      </CardContainer>
-                    </div>
-                  );
-                })}
-              </div>
+            <div className="mx-auto max-w-7xl text-center">
+              <TextGenerateEffect
+                words="Projects"
+                className="text-4xl sm:text-5xl lg:text-6xl"
+              />
+              <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-[#f97316] to-transparent" />
             </div>
-          </section>
+          </div>
+
+          {/* Stacking container */}
+          <div ref={containerRef} className="relative">
+            {projects.map((project, index) => (
+              <DesktopCard
+                key={index}
+                project={project}
+                index={index}
+                total={projects.length}
+                cardRef={(el) => {
+                  cardEls.current[index] = el;
+                }}
+              />
+            ))}
+          </div>
         </div>
+
+        {/* Outside sticky boundary — title scrolls away before this */}
+        <div className="h-[15vh]" aria-hidden="true" />
       </div>
 
       {/* Mobile: Vertical Stack */}
@@ -233,101 +279,46 @@ export default function Projects() {
         <div className="mx-auto max-w-7xl px-6">
           {/* Title */}
           <div className="mb-8 text-center">
-            <TextGenerateEffect
-              words="Projects"
-              className="text-4xl sm:text-5xl"
-            />
+            <TextGenerateEffect words="Projects" className="text-4xl sm:text-5xl" />
             <div className="mx-auto mt-4 h-0.5 w-48 bg-gradient-to-r from-transparent via-[#f97316] to-transparent" />
           </div>
 
           {/* Vertical Stack of Cards */}
           <div className="space-y-8">
-            {projects.map((project, index) => {
-              const imageClass = "h-64 w-full object-contain rounded-xl";
-
-              return (
-                <div key={index} className="flex items-center justify-center">
-                  <div className="w-full max-w-md">
-                    <div 
-                      className="group/card relative h-auto w-full rounded-3xl backdrop-blur-xl p-5 transition duration-300 hover:transform hover:scale-[1.02]"
-                      style={{
-                        background: 'rgba(30, 30, 30, 0.7)',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        boxShadow: '0 8px 32px 0 rgba(249, 115, 22, 0.1)',
-                      }}
-                    >
-                      <h3 className="text-2xl font-semibold text-white">
-                        {project.title}
-                      </h3>
-                      <p className="mt-3 text-sm leading-relaxed text-white">
-                        {project.description}
-                      </p>
-                      <div className="mt-5 w-full">
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          width={1000}
-                          height={600}
-                          className={imageClass}
-                          quality={100}
-                          unoptimized
-                        />
-                      </div>
-                      <div className="mt-5 flex flex-wrap gap-2">
-                        {project.skills.map((skill, skillIndex) => (
-                          <span
-                            key={skillIndex}
-                            className="rounded-full backdrop-blur-md px-3 py-1 text-xs uppercase tracking-[0.2em] font-semibold"
-                            style={{
-                              background: 'rgba(249, 115, 22, 0.04)',
-                              border: '1px solid rgba(249, 115, 22, 0.12)',
-                              color: 'rgba(249, 115, 22, 0.6)',
-                            }}
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="mt-6 flex flex-wrap items-center gap-3">
-                        {!project.nda && project.links?.github && (
-                          <a
-                            href={project.links.github}
-                            target="_blank"
-                            className="rounded-xl px-4 py-2 text-sm font-normal text-white hover:text-[#f97316] transition"
-                          >
-                            GitHub →
-                          </a>
-                        )}
-                        {!project.nda && project.links?.live && (
-                          <a
-                            href={project.links.live}
-                            target="_blank"
-                            className="rounded-xl px-4 py-2 text-sm font-bold text-white transition backdrop-blur-md"
-                            style={{
-                              background: 'rgba(249, 115, 22, 0.3)',
-                              border: '1px solid rgba(249, 115, 22, 0.5)',
-                            }}
-                          >
-                            Live Demo
-                          </a>
-                        )}
-                        {project.nda && (
-                          <p 
-                            className="rounded-xl px-4 py-2 text-sm font-normal italic text-white backdrop-blur-md"
-                            style={{
-                              background: 'rgba(255, 255, 255, 0.05)',
-                              border: '1px solid rgba(255, 255, 255, 0.1)',
-                            }}
-                          >
-                            Code &amp; demo unavailable due to NDA
-                          </p>
-                        )}
-                      </div>
+            {projects.map((project, index) => (
+              <div key={index} className="flex items-center justify-center">
+                <div className="w-full max-w-md">
+                  <div
+                    className="group/card relative h-auto w-full rounded-3xl p-5 backdrop-blur-xl transition duration-300 hover:scale-[1.02]"
+                    style={{
+                      background: "rgb(18, 18, 18)",
+                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      boxShadow: "0 8px 32px 0 rgba(249, 115, 22, 0.1)",
+                    }}
+                  >
+                    <h3 className="text-2xl font-semibold text-white">
+                      {project.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-white">
+                      {project.description}
+                    </p>
+                    <div className="relative mt-5 h-60 w-full overflow-hidden rounded-xl">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 28rem"
+                        className="object-contain"
+                        quality={75}
+                        unoptimized
+                      />
                     </div>
+                    <SkillPills skills={project.skills} />
+                    <ProjectLinks project={project} />
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </section>

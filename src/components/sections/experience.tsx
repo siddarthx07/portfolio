@@ -34,7 +34,7 @@ const experience: ExperienceEntry[] = [
   {
     period: "Marine Corps Community Services",
     yearLabel: "SEP 2024 – FEB 2025",
-    heading: "Software Engineer · Arlington, VA",
+    heading: "Software Engineer",
     highlight:
       "Developed and integrated 15+ REST APIs into a fraud detection platform, provisioned ML model artifact infrastructure on AWS achieving a 30% reduction in data retrieval time, and implemented secure JWT-based authentication with sub-500ms OTP delivery.",
     bullets: [],
